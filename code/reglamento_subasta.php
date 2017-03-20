@@ -29,11 +29,11 @@ function iagree()
 	else $("#continue").hide();
 }
 </script>
-<h2> REGLAMENTO DE SUBASTA ELECTR&Oacute;NICA</h1><br />
+<h2> REGLAMENTO DE LA COMPRA ELECTR&Oacute;NICA</h1><br />
 <table>
 <tr>
     <td height="35px" align="left">
-Para poder ingresar a la subasta debe estar de acuerdo con el siguiente reglamento:  <br>  
+Para poder ingresar a la compra debe estar de acuerdo con el siguiente reglamento:  <br>  
         </td>
 </tr>
 <tr>
@@ -45,8 +45,8 @@ Para poder ingresar a la subasta debe estar de acuerdo con el siguiente reglamen
 					$extension = admin::getExtension($details["pro_document"]);
 					$imgextension = admin::getExtensionImage($extension);
 					if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
-                    <p>Reglamento espec&iacute;fico de la subasta <?=$details["pro_name"]?>:
-				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>/" target="_blank"><img border="0" src="<?=$domain."/admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?><br><br>
+                    <p>Reglamento espec&iacute;fico de la compra <?=$details["pro_name"]?>:
+				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."/admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?><br><br>
 </td>
 </tr>
 <tr>

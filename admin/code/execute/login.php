@@ -14,11 +14,11 @@ if ($usuario=="" || $contrasena==""){
 	}
 $sql = "SELECT * FROM sys_users " .
         "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
-        " usr_pass ='".md5($contrasena)."' ";
+        " usr_pass ='".$contrasena."' ";
 
 $numfiles = admin::getDbValue("SELECT count(*) FROM sys_users " .
         "		WHERE usr_login='".admin::toSql($usuario,'text')."' and ".
-        " usr_pass ='".md5($contrasena)."' ");
+        " usr_pass ='".$contrasena."' ");
 //if($usuario=="director4") admin::doLog("SQL:".$sql.":cantidad:".$numfiles);        
 			  //usr_pass=LOWER(CONVERT(VARCHAR(32),HashBytes('MD5','".admin::toSql($contrasena,'text')."'),2))";
 

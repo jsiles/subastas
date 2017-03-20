@@ -4,7 +4,7 @@ $usernameClient = $_REQUEST["usernameClient"];
 $passwordClient = $_REQUEST["passwordClient"];
 $usernameClient = trim($usernameClient);
 $passwordClient = trim($passwordClient);
-$uidClient = admin::getDBValue("SELECT cli_uid FROM mdl_client WHERE (cli_mainemail='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_password='".md5(admin::toSql($passwordClient,"Text"))."' and cli_delete=0 and cli_status=0 and cli_status_main=1");
+$uidClient = admin::getDBValue("SELECT cli_uid FROM mdl_client WHERE (cli_mainemail='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_password='".admin::toSql($passwordClient,"Text")."' and cli_delete=0 and cli_status=0 and cli_status_main=1");
 //echo $uidClient."##";echo "SELECT cli_uid FROM mdl_client WHERE (cli_mainemail='".admin::toSql($usernameClient,"Text")."' or cli_user='".admin::toSql($usernameClient,"Text")."') and cli_password='".md5(admin::toSql($passwordClient,"Text"))."' and cli_delete=0 and cli_status=0 and cli_status_main=1";die;
 if (strlen($uidClient)>0)
 {

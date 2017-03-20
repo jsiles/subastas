@@ -20,7 +20,7 @@ $i=1;
 if ($lang=='es') $LangFile='';
 ?>
 <ul>
-<? 
+<?php 
 while($con_category = $db3->next_record()) 
 { 
 	if (trim($con_category["col_url"])==trim($urlTitle)) {$aClass="active";}
@@ -55,19 +55,23 @@ while($con_category = $db3->next_record())
     	<a href="<?=$domain?>/<?=$urlLangAux?><?=$con_category["col_url"]?>/<?=$firstSublvl?>"  accesskey="<?=$i?>" title="<?=$con_category["col_title"];?>">
       <span><?=$con_category["col_title"]?></span></a>
     </li > 
-<? 
+<?php 
 $i++;
 }?>
 </ul>
 </br></br>
 <div>
 	<div style="float:left; margin-left:50px">
-    	</br><span class="small">DERECHOS RESERVADOS - Copyright (c) 2016 </span> </br>
-        <span class="small">SCLE LTDA.</span> </br>
-        <span class="small">SOLUCIONES DE COMPRAS Y LOGISTICA EMPRESARIAL</span>
+    	</br><span class="small">Derechos reservados &copy; SCLE LTDA.</span> </br>
+        <span class="small">Soluciones de Compras y Log&iacute;stica Empresarial</span>
     </div>
     <div  style="float:right; margin-right:50px">
     <img  src="<?=$domain?>/lib/scle.png" alt="scle">
     </div>
+        <div class="clear"></div>
+    <div style="float:right;margin-right:100px"><span style="color: blue;font-size: 14; font-weight: bold; " id="clockSys"></span></div>
 </div>
 </br>
+<script type="text/javascript">
+  startTime('clockSys');
+</script>

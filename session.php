@@ -12,6 +12,7 @@
 <script type="text/javascript" src="<?=$domain?>/js/jquery.js"></script>
 <script type="text/javascript" src="<?=$domain?>/js/thickbox.js"></script>
 <script type="text/javascript" src="<?=$domain?>/js/session.js"></script>
+<script type="text/javascript" src="<?=$domain?>/js/md5.min.js"></script>
 </head>
 <body class="listings">
 <div id="wrapper">

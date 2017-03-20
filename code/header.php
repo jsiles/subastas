@@ -10,6 +10,23 @@ $imgs = admin::getDbValue("select top 1 ban_file from mdl_banners_contents, mdl_
 $ban_name = admin::getDbValue("select top 1 ban_title from mdl_banners_contents, mdl_banners where mbc_delete=0 and mbc_status='ACTIVE' and mbc_ban_uid=ban_uid order by mbc_position ,mbc_ban_uid");
 
 ?>
+<script language="javascript" type="text/javascript">
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clockSys').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+</script>
 <div id="top-header" class="container">
 			<div id="logo">
 				<h1><a href="<?=$domain?>" > Sistema de Compras Online</a></h1>
