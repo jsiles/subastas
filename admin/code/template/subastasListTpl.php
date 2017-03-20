@@ -51,6 +51,10 @@ $qsearch="select sub_mount_base, sub_modalidad, sub_moneda, pro_uid, pro_name, p
         . "WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_delete=0 and sub_mode='SUBASTA' and sub_uid=suu_sub_uid "
         . " $Where ";
 
+$GroupBy =" GROUP BY sub_mount_base, sub_modalidad, sub_moneda, pro_uid, pro_name, pca_name, sub_status, sub_uid, "
+        . "sub_type, iif('$timeNow'>sub_deadtime,'concluida',iif('$timeNow'>sub_hour_end, 'subastandose', 'aprobada')), "
+        . "sub_finish ";
+
 //echo $qsearch;
 
 $order= admin::toSql(admin::getParam("order"),"Number");
@@ -76,7 +80,7 @@ else $linOrder=5;
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <?php
 /********EndResetColorDelete*************/
-$_pagi_sql=$qsearch.$orderCode;
+$_pagi_sql=$qsearch.$GroupBy.$orderCode;
 //echo $_pagi_sql;
 
 $_pagi_cuantos = $maxLine;//Elegí un número pequeño para que se generen varias páginas
@@ -85,6 +89,7 @@ $_pagi_nav_num_enlaces = 5;//Elegí un número pequeño para que se note el resulta
 //Decidimos si queremos que se muesten los errores de mysql
 $_pagi_mostrar_errores = false;//recomendado true sólo en tiempo de desarrollo.
 $nroReg = $db->numrows($_pagi_sql);
+//echo $nroReg;
 $db->query($_pagi_sql);
 
 include("core/paginator.inc.php");
