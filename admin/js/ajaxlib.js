@@ -68,6 +68,18 @@ function viewInputFile(status)
 		$('#imageChange1').hide();
 		}
 	}
+function changeInputFile(status)
+	{
+	if (status=='on')
+		{
+		$('#div_adjunt_file_change').show();
+		}
+	if (status=='off')
+		{
+		$('#div_adjunt_file_change').hide();
+		}
+	}
+
 function showHide(e)
 	{
 		$('#'+e).toggle();					

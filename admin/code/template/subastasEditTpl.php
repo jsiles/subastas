@@ -33,7 +33,7 @@ $prod = $db->next_record();
                 <td width="64%"><input type="text" class="input3" value="<?=$prod["sub_sol_uid"]?>" name="sol_uid" id="sol_uid" />
                     <br /><span id="div_sol_uid" style="display:none; padding-left:5px; padding-right:5px;" class="error">Campo requerido</span>
                 </td>
-                <td width="7%">&nbsp;</td>
+                
             </tr>
             <tr>
 				<td><?=admin::labels('name');?>:</td>
@@ -85,8 +85,7 @@ $prod = $db->next_record();
 	     <br /><span id="div_add_unidad_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 <br />
             </td>
-            <td width="7%">&nbsp;</td>
-            
+           
         </tr>
             <tr>
 				<td width="29%"><?=admin::labels('category','label');?>:</td>
@@ -193,7 +192,6 @@ $prod = $db->next_record();
 			//	echo $imgextension;die;
 			?>
 			<div id="document_edit_<?=$prod["pro_uid"]?>">
-			<div id="changeFile">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="12%" rowspan="2" align="center" valign="top">
@@ -203,21 +201,22 @@ $prod = $db->next_record();
 				<td width="88%" style="font-size:11px;">
 				<span class="nameFile"><?=substr($prod["pro_document"],0,20);?>...</span>
 			<br />
-			<a href="javascript:chageUploadFile('on')" class="small2">
+			<a href="javascript:changeInputFile('on')" class="small2">
 			<?=admin::labels('change');?>
-				</a> <span class="pipe">|</span> <a href="#" onclick="removeDoc(<?=$prod["pro_uid"]?>);return false;" title="<?=admin::labels('del')?>" class="small3"><?=admin::labels('del')?></a>				</td>
+				</a> <span class="pipe">|</span> <a href="#" onclick="removeDoc(<?=$prod["pro_uid"]?>);return false;" title="<?=admin::labels('del')?>" class="small3"><?=admin::labels('del')?></a>				
+                                </td>
 			</tr>
 			<tr>
-				<td height="24" valign="top"><div id="div_adjunt_file_change" style="display:none">
-				<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td>
-				<input type="file" name="pro_document" id="pro_document" size="13" style="font-size:11px;" class="input5"></td>
-				<td> <a href="javascript:chageUploadFile('off')" onclick="document.getElementById('pro_document').value='';"><img border="0" src="lib/close.gif" align="top"/></a>				</td>
-				</tr>
-				</table>
-				</div>				</td>
+                            <td width="88%">
+                                <div id="div_adjunt_file_change" style="display:none;">
+				<input type="file" name="pro_document" id="pro_document" size="13" style="font-size:11px;" >
+                                <a href="javascript:changeInputFile('off')" onclick="document.getElementById('pro_document').value='';">
+                                    <img border="0" src="lib/close.gif" align="top"/></a>
+                                </div>
+                                <span id="div_adjunt_file" class="error" style="display:none">Solo archivos jpg bmp gif png doc pdf xls</span></div>
+                            </td>
 			</tr>
 			</table>
-			</div>
 			</div>
 			<div id="document_add_<?=$news["new_uid"]?>" style="display:none;"></div>
 			<?php 
@@ -457,7 +456,8 @@ $prod = $db->next_record();
                 <a href="borrar" onclick="deleteOtherTransporte();return false;" class="small3"><?=admin::labels('del');?></a>
                 <div id="div_other_transporte" style="display:none;">
 		<input type="text" name="other_transporte" id="other_transporte" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_other_transporte_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_other_transporte_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_other_transporte_error').style.display='none';"/>		
-		<a href="" onclick="transporteAdd();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeOtherTransporte();" class="link2">Cerrar</a>		</div>
+		<a href="" onclick="transporteAdd();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeOtherTransporte();" class="link2">Cerrar</a>		
+                </div>
 				<br /><span id="div_other_transporte_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
                 </div>
                 

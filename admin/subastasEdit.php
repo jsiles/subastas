@@ -68,6 +68,35 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <!--ENDIMPROMTU--> 
 <!-- GROW de los Text areas -->
 <script type="text/javascript">
+function removeDoc(id){
+	var txt = 'Esta seguro de eliminar el Documento?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Eliminar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = id; /* m.find('#list').val(); */
+
+				  $('#document_edit_'+uid).fadeOut(1, function(){ $(this).remove(); });
+				  
+					  $.ajax({
+						url: 'code/execute/subastaDocDel.php',
+						type: 'POST',
+						data: 'uid='+uid
+					});
+					//document.getElementById('image_add_'+uid).innerHTML = '<input type="file" name="pro_document" id="pro_image" size="31" class="input">';
+					$('#div_adjunt_file_change').show();
+			}
+			else{}
+			
+		}
+	});
+}	
+
+</script>
+<script type="text/javascript">
 function removeImg(id){
 	var txt = '<?=admin::labels('imagequestion');?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{

@@ -118,7 +118,7 @@ $solEdit=$db->next_record();
         </tr>
         <tr>
             <td width="5%" >Observaciones:</td>    
-            <td width="20%" ><input name="sol_observaciones" disabled="disabled" value="<?=$solEdit["sol_observaciones"]?>" class="input"></td>
+            <td width="20%" ><textarea id="sol_observaciones" name="sol_observaciones" disabled="disabled" col="200" rows="5" class="textarea"><?=$solEdit["sol_observaciones"]?></textarea>
             <td width="7%">&nbsp;</td>
         </tr>
         <tr>
@@ -197,33 +197,7 @@ $solEdit=$db->next_record();
             <td width="7%">&nbsp;</td>
         </tr>
 
-        <tr>
-            <td width="5%" >Proveedores:</td>
-            <td width="20%">
-         <?php
-        $arrayClient = admin::dbFillArray("select cli_uid, cli_socialreason as name from mdl_client where cli_delete=0 ");
-        if(is_array($arrayClient))
-        {
-	foreach($arrayClient as $value=>$name)
-	{
-                  $valChecked=admin::getDbValue("select count(sop_cli_uid) from mdl_solicitud_proveedor where sop_cli_uid=$value and sop_sol_uid=$sol_uid");
-                  if($valChecked>0)$selectUni ='checked="checked"';
-                  else $selectUni ="";
-                  
-	?>
-                <input name="sol_cli_uid[]" disabled="disabled" type="checkbox" value="<?=$value?>" size="9" <?=$selectUni?> /><?=$name?><br />
-    <?php
-        }
-        }
-        else{
-	?>
-           No existen proveedores.
-        <?php
-        }
-        ?>
-            </td>
-                       <td width="7%">&nbsp;</td>
-        </tr>
+
         <tr>
             <td valign="top"><?=admin::labels('status');?></td>
             <td><select name="sol_status" class="listMenu" id="sol_status">
