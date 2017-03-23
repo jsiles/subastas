@@ -24,7 +24,7 @@ $prod = $db->next_record();
     <td width="15%" style="color:#16652f" align="left">Producto</td>
     <td width="15%" style="color:#16652f" align="left">Descripci&oacute;n</td>
     <td width="20%" style="color:#16652f" align="left">Imagen</td>
-    <td width="10%" style="color:#16652f" align="left">Precio Base</td>
+    <td width="10%" style="color:#16652f" align="left">Precio Referencial</td>
     <?php
     if($prod["sub_modalidad"]!="PRECIO"){
     ?>
@@ -111,7 +111,7 @@ if ($nroReg>0)
     <td width="12%" style="color:#16652f">Producto</td>
     <td width="12%" style="color:#16652f">Descripci&oacute;n</td>
     <td width="12%" style="color:#16652f">Imagen</td>
-    <td width="12%" style="color:#16652f">Precio base</td>
+    <td width="12%" style="color:#16652f">Precio Referencial</td>
      <?php
     if($prod["sub_modalidad"]!="PRECIO"){
     ?>

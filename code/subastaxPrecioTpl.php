@@ -25,41 +25,16 @@
 					}
 					?>
                     </p>
-                    	<div id="subastaDetail" class="details">
+                    <div id="subastaDetail" class="details" >
                                 <?php
-//echo $timeSubasta;
+
 								   $bidsCompra=admin::getDBvalue("SELECT sub_type FROM mdl_subasta where sub_uid=".$xitem["xit_sub_uid"]);
-/*									if($bidsCompra=='COMPRA') 
-                                                                        {
-									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
-									$valBidsCli=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
-                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. Se agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
-                                                                        }
-									else{
-									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."'");
-									$valBidsCli=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_biditem where bid_xit_uid='".$xitem["xit_uid"]."' and bid_cli_uid=$cli_uid");
-                                                                        if($valBids==$valBids) $mensaje="El proceso de compra ha concluido. Se agradece su participaci&oacute;n.";//$mensaje="Su oferta gano.";
-                                                                        }								
-									$factor = admin::getDbValue("select inc_ajuste from mdl_incoterm where inc_delete=0 and inc_cli_uid=".admin::getSession("uidClient")." and inc_sub_uid=".$xitem["xit_sub_uid"]);
-									//$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
-									
-									if(!$valBids) 
-								    {
-										$centavos=substr($xitem["xit_price"],-3);
-										$montoGlobal=str_replace($centavos,'',$xitem["xit_price"]);
-										$valBids=$xitem["xit_price"];
-                                                                                }
-									else
-									{
-                                                                            	$centavos=substr($valBids,-3);
-										$montoGlobal=str_replace($centavos,'',$valBids);
-                                                                                }
-*/                                                                              $centavos=substr($xitem["xit_price"],-3);
+                                                                          $centavos=substr($xitem["xit_price"],-3);
 										$montoGlobal=str_replace($centavos,'',$xitem["xit_price"]);
 									$centavos=str_replace('.','',$centavos);
 									
 								?>
-									<p class="left">Precio:
+									<p class="left">Precio Referencial:
 					       <?=$montoGlobal?>.<sup><?=$centavos?></sup></p> 
                                                                         <div class="clear"></div>
                                    <?php
@@ -92,21 +67,8 @@
 	<label class="bold">Oferta:</label>
 	<input name="ct_value_<?=$xitem["xit_uid"]?>" id="ct_value_<?=$xitem["xit_uid"]?>" type="text" size="15" class="inputB" value="" onKeyUp="valOfertPrecio(<?=$xitem["xit_uid"]?>);"/>
         
-        <a href="<?=$domain?>/code/bidsPrecio.php?sub_uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>&uid=<?=$xitem["xit_uid"]?>" id="planCuentas_<?= $xitem["xit_uid"] ?>" rel="facebox" class="addcart">Aceptar</a> (Ingrese <?php 
-		if($bidsCompra=='COMPRA')
-		{
-		//if($xitem["xit_price"]<=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]-$xitem["xit_unity"]),2),2).' o menos)'; 
-		//else
-                    echo $moneda.' '.($xitem["xit_price"]).' o menos)'; 
-		
-			}
-		else
-		{
-		//if($xitem["xit_price"]>=$valBids) echo $moneda.' '.number_format(round(($xitem["xit_price"]+$xitem["xit_unity"]),2),2).' o m&aacute;s)'; 
-		//else 
-                echo $moneda.' '.($xitem["xit_price"]).' o m&aacute;s)'; 
-			}
-		?>
+        <a href="<?=$domain?>/code/bidsPrecio.php?sub_uid=<?=$xitem["xit_sub_uid"]?>&ofert=<?=$valBids?>&uid=<?=$xitem["xit_uid"]?>" id="planCuentas_<?= $xitem["xit_uid"] ?>" rel="facebox" class="addcart">Aceptar</a> (Ingrese su oferta)
+        
         </div>
       
 	  <!--<p class="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=$xitem["xit_unity"]?></p>-->
@@ -139,9 +101,8 @@
 					 if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
                     <p>Reglamento espec&iacute;fico de la compra:
 				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."../admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?>	
-						<p><?=utf8_encode($details["pro_description"])?></p>
 					</div>
 				</div>`
                 
 			</div>
-	
+            </script>

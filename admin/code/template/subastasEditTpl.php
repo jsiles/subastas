@@ -254,9 +254,7 @@ $prod = $db->next_record();
 				<td width="64%">
 				<select name="sub_modalidad" id="sub_modalidad" class="input" onchange="subastaOpcion();">
                 	<option  <?php if ('TIEMPO'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="TIEMPO">Por tiempo</option>
-                     <option <?php if ('HOLANDESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="HOLANDESA">Inversa Holandesa</option>
-                    <option <?php if ('JAPONESA'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="JAPONESA">Inversa Japonesa</option>
-                    <option <?php if ('ITEM'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="ITEM">Por Item</option>
+                     <option <?php if ('ITEM'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="ITEM">Por Item</option>
                     <option <?php if ('PRECIO'==$prod["sub_modalidad"]) echo 'selected="selected"';?> value="PRECIO">Por Precio</option>
                     </select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	

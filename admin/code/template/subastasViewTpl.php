@@ -413,7 +413,7 @@ if ($nroReg>0)
     <td width="12%" style="color:#16652f">Producto</td>
     <td width="12%" style="color:#16652f">Descripci&oacute;n</td>
     <td width="12%" style="color:#16652f">Imagen</td>
-    <td width="12%" style="color:#16652f">Precio base</td>
+    <td width="12%" style="color:#16652f">Precio Referencial</td>
      <?php
     if($prod["sub_modalidad"]!="PRECIO"){
     ?><td width="12%" style="color:#16652f">Unidad de mejora</td>

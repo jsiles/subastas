@@ -34,7 +34,7 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 
 <body>
 <table width="100%">
-<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Informe de ejecucion de subastas</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
+<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1> Parametrizaci&oacute;n del proceso de compra</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>1: Datos generales del proceso de compra</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>

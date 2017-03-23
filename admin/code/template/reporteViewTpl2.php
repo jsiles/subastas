@@ -59,7 +59,7 @@ while ($firstPart = $db->next_record())
 <tr>
     <td ><img src="<?=$domain?>/lib/logo.png" width="100" />
     </td>
-    <td colspan="4"><h1>Informe de ejecucion del proceso de compra</h1><br /><span>Fecha: <?=date("d/m/Y")?></span></td>
+    <td colspan="4"><h1>Parametrizaci&oacute;n del proceso de compra</h1><br /><span>Fecha: <?=date("d/m/Y")?></span></td>
 </tr>
 <tr>
     <td colspan="5"><br /><br /></td>

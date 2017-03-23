@@ -33,6 +33,8 @@ $adjudicado=admin::getDBvalue("SELECT top 1 concat(cl.cli_legalname,' ',cl.cli_l
 $elaborado=admin::getDBvalue("SELECT sua_elaborado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $aprobado=admin::getDBvalue("SELECT sua_aprobado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
+$montoAhorro=admin::getDBvalue("SELECT sua_ahorro FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
+$montoAdjudicacion=admin::getDBvalue("SELECT sua_monto FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 
 $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,7 +45,7 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 
 <body>
 <table width="100%">
-<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Parametrización de subastas</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
+<tr><td ><img src="'.$domain.'/lib/logo.png" width="100" /></td><td colspan="4"><h1>Informe de ejecuci&oacute;n del proceso de compra</h1><br /><span>Fecha: '.date("d/m/Y").'</span></td></tr>
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>1: Datos generales del proceso de compra</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
@@ -78,6 +80,10 @@ while ($secPart = $db2->next_record())
 $html.=	'</table>
 </td></tr>
 <tr><td><br /><br /><br /></td><td><br /></td></tr>
+<tr><th colspan="5" align="left">Monto Adjudicaci&oacute;n:</th></tr>
+<tr><td colspan="5" align="left">'.$montoAdjudicacion.'</td></tr>
+<tr><th colspan="5" align="left">Monto Ahorro:</th></tr>
+<tr><td colspan="5" align="left">'.$montoAhorro.'</td></tr>
 <tr><th colspan="5" align="left">Observaciones:</th></tr>
 <tr><td colspan="5" align="left">'.$obs.'</td></tr>
 <tr><td><br /><br /><br /><br /></td><td><br /><br /><br /><br /></td></tr>

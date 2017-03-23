@@ -63,12 +63,14 @@ $adjudicado=admin::getDBvalue("SELECT top 1 concat(cl.cli_legalname,' ',cl.cli_l
 $elaborado=admin::getDBvalue("SELECT sua_elaborado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $aprobado=admin::getDBvalue("SELECT sua_aprobado FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
+$montoAhorro=admin::getDBvalue("SELECT sua_ahorro FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
+$montoAdjudicacion=admin::getDBvalue("SELECT sua_monto FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 
 ?>
 <table width="50%" border="0">
     <tr>
         <td ><img src="<?=$domain?>/lib/logo.png" width="100" /></td>
-        <td colspan="4"><h1>Parametrizaci&oacute;n del proceso de compra</h1><br /><span>Fecha: <?=date("d/m/Y")?></span></td>
+        <td colspan="4"><h1>Informe de ejecuci&oacute;n del proceso de compra</h1><br /><span>Fecha: <?=date("d/m/Y")?></span></td>
     </tr>
 <tr>
     <td colspan="5"><br /><br /></td>
@@ -181,6 +183,21 @@ while ($secPart = $db2->next_record())
 <tr>
     <td colspan="5"><br /><br /><br /></td>
 </tr>
+<tr>
+    <th colspan="5" align="left">Monto de Adjudicaci&oacute;n:</th>
+</tr>
+<tr>
+    <td colspan="5" align="left"><?=$montoAdjudicacion?></td>
+</tr>
+
+<tr>
+    <th colspan="5" align="left">Monto de Ahorro:</th>
+</tr>
+<tr>
+    <td colspan="5" align="left"><?=$montoAhorro?></td>
+</tr>
+
+
 <tr>
     <th colspan="5" align="left">Observaciones:</th>
 </tr>

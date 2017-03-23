@@ -59,6 +59,7 @@ $prodTpl = $db->next_record();
 				<td width="25%" class="txt11 color2">Fecha y hora:</td>
                                 <td width="25%" class="txt11 color2">Monto:</td>
                                 <td width="25%" class="txt11 color2">Item:</td>
+                                <td width="25%" class="txt11 color2">Especificaci&oacute;n T&eacute;cnica:</td>
                                 
 			</tr>         
                
@@ -72,7 +73,21 @@ $prodTpl = $db->next_record();
 				<td width="25%"><?=$clientName?></td>
 				<td width="25%"><?=$content["bid_date"]?></td>
                                 <td width="25%"><?=$content["bid_mount"]?></td>
-                                <td width="25%"><?=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delete=0");?></td></tr>
+                                <td width="25%"><?=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delete=0");?></td>
+                                <td width="25%"><?php
+                                if(file_exists(PATH_ROOT."/docs/subasta/".$content["bid_doc"])){
+                                    
+                                   ?>
+                                    <a href="<?=PATH_DOMAIN."/docs/subasta/".$content["bid_doc"]?>" target="blank"><img src="<?=PATH_DOMAIN."/admin/lib/ext/doc-txt.png"?>" border="0" /></a>
+                                    <?php
+                                    
+                                }else{
+                                    ?>&nbsp;
+                                    <?php
+                                    
+                                }
+                                ?></td> 
+                                 </tr>
              	<?php
 				 }
 				 ?>    

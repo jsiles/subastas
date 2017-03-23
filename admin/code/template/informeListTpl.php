@@ -193,7 +193,7 @@ while ($subasta_list = $pagDb->next_record())
     7 DESIERTA
 
      */
-        echo $sub_estado;
+        //echo $sub_estado;
 
     switch ($sub_finish) {
     	case  0:

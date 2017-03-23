@@ -183,7 +183,7 @@ span, label, p, td, h2 {
 
 #top-banner {
 	float: left;
-	width: 80%;
+	width: 100%;
 	height: 150px;
 }
 
@@ -618,12 +618,12 @@ span, label, p, td, h2 {
 
 .listings .item-box .details {
 	display: inline-block;
-	width: 240px;
+	width: 640px;
 }
 
 .details .item-box .details {
 	display: inline-block;
-	width: 240px;
+	width: 640px;
 }
 
 .item-box .left {

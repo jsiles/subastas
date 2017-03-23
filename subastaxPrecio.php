@@ -85,7 +85,9 @@ $timeInicio = 2;
 <link href="<?=$domain?>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="shortcut icon" href="<?=$domain?>/lib/favicon.ico" />
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
-<script type="text/javascript" src="<?=$domain?>/js/jquery.js"></script>
+<!--<script type="text/javascript" src="<?=$domain?>/js/jquery.js"></script>-->
+<script type="text/javascript" src="<?=$domain?>/js/jquery-1.10.1.min.js"></script>
+
 <script type="text/javascript" src="<?=$domain?>/js/admin.js"></script>
 <link href="<?=$domain?>/css/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
 <script src="<?=$domain?>/js/facebox.js" type="text/javascript"></script>

@@ -34,7 +34,22 @@ function bidsLoad()
 	round = document.getElementById('round_'+<?=$xit_uid?>).value;
 	cli_uid = document.getElementById('cli_uid_'+<?=$xit_uid?>).value;
 	var subastaDayNow = new Date();
-	
+        
+        var file_data = $('#docTec')[0].files[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        $.ajax({
+                url:  domain+"/code/upload.php?sub_uid="+sub_uid+"&cli_uid="+cli_uid+"&uid="+uid, // point to server-side PHP script 
+                dataType: 'text',  // what to expect back from the PHP script, if anything
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,                         
+                type: 'post',
+                success: function(php_script_response){
+                   // alert(php_script_response); // display response from the PHP script, if any
+                }        
+        });
 	$.ajax({
 		   type: "POST",
 		   url: domain+"/code/bidsExecutePrecio.php",
@@ -46,7 +61,7 @@ function bidsLoad()
 			 setTimeout(function () {
                             $.facebox.close();},2000);
 			}
-		 });
+		 });        
 	//$.facebox.close();		
 return false;
 }
@@ -64,20 +79,25 @@ else $mayVal=$valBids+$unidad;
 
 if($bidsCompra=='COMPRA')
 {
-	if(!$monto_ofertado) echo '<form name="formBids" class="formLabel">Introduzca una mejor oferta al monto m&iacute;nimo:'.$mayVal.'<br><br><a href="Cerrar" onclick="$.facebox.close();return false;">Cancelar</a></form>';
-	else {
-		echo '<form name="formBids" class="formLabel">Su oferta es: '.$orig_monto_ofertado.' + el factor de ajuste asciende a: '.$monto_ofertado.', oferta realizada en fecha y a horas:'.date('d-m-Y H:i:s').'.<br><br> Por favor confirmar los datos de la misma. <br><br>'
-                        . 'Adjuntar especificaci&oacute;n t&eacute;cnica: <input name="docTec" type="file" /><br />'
-                        . '<p><a href="#" onclick="return bidsLoad();" class="addcart">Confirmar</a> o <a href="Cerrar" onclick="$.facebox.close();return false;">Cancelar</a></p></form><br>';
-	}
+	
+		echo '<form name="formBids" enctype="multipart/form-data"  class="formLabel">Su oferta es: '.$orig_monto_ofertado.' + el factor de ajuste asciende a: '.$monto_ofertado.', oferta realizada en fecha y a horas:'.date('d-m-Y H:i:s').'.<br><br>'
+                        . ' <br><br>'
+                        . 'Adjuntar especificaci&oacute;n t&eacute;cnica: '
+                        . '<br /><br /><br /><br /><input name="docTec" id="docTec" type="file" /><br /><br /><br /><br />'
+                        . '<p><a href="#" onclick="return bidsLoad();" class="addcart">Confirmar</a> o <a href="Cerrar" onclick="$.facebox.close();return false;">Cancelar</a></p></form><br>'
+                        . 'Por favor confirmar los datos de la oferta. <br><br>';
+	
 }else
 {
 
-	if(!$monto_ofertado) echo '<form name="formBids" class="formLabel">Introduzca una mejor oferta al monto m&iacute;nimo:'.$mayVal.'<br><br><a href="Cerrar" onclick="$.facebox.close();return false;">Cancelar</a></form>';
-	else {
-		echo '<form name="formBids" class="formLabel">Su oferta es: '.$orig_monto_ofertado.' - el factor de ajuste asciende a: '.$monto_ofertado.', oferta realizada en fecha y a horas:'.date('d-m-Y H:i:s').'.<br><br> Por favor confirmar los datos de la misma. <br><br>'
-                        . 'Adjuntar especificaci&oacute;n t&eacute;cnica: <input name="docTec" type="file" /><br />'
-                        . '<p><a href="#" onclick="return bidsLoad();" class="addcart">Confirmar</a> o <a href="Cerrar" onclick="$.facebox.close();return false;">Cancelar</a></p></form><br>';
-	}
+		echo '<form name="formBids" class="formLabel">Su oferta es: '.$orig_monto_ofertado.' - el factor de ajuste asciende a: '.$monto_ofertado.', oferta realizada en fecha y a horas:'.date('d-m-Y H:i:s').'.<br><br>'
+                        . '<br><br>'
+                        . 'Adjuntar especificaci&oacute;n t&eacute;cnica: '
+                        . '<br /><br /><br /><br /><input name="docTec" id="docTec" type="file" /><br /><br /><br /><br />'
+                        . '<p><a href="#" onclick="return bidsLoad();" class="addcart">Confirmar</a> o <a href="Cerrar" onclick="$.facebox.close();return false;">Cancelar</a></p></form><br>'
+                        . 'Por favor confirmar los datos de la oferta. <br><br>';
+	
+    
+  
 }
 ?>
