@@ -26,6 +26,7 @@ $prodTpl = $db->next_record();
 				<td width="40%" class="txt11 color2">Nombre de usuario:</td>
 				<td width="30%" class="txt11 color2">Fecha y hora:</td>
                 <td width="30%" class="txt11 color2">Monto:</td>
+                <td width="30%" class="txt11 color2">Monto coon factor de ajuste:</td>
 			</tr>         
                
                  <?php
@@ -37,7 +38,9 @@ $prodTpl = $db->next_record();
 				 ?><tr>
 				<td width="40%"><?=$clientName?></td>
 				<td width="30%"><?=$content["bid_date"]?></td>
-                <td width="30%"><?=$content["bid_mount"]?></td></tr>
+                <td width="30%"><?=$content["bid_mount"]?></td>
+                <td width="30%"><?=$content["bid_mountxfac"]?></td>
+                                 </tr>
              	<?php
 				 }
 				 ?>    
@@ -48,7 +51,7 @@ $prodTpl = $db->next_record();
 		 ?>
                         <table width="100%" border="0">
          <tr>
-            <td colspan="2" class="titleBox">Listado de ofertas:</td>
+            <td colspan="2" class="titleBox">Cuadro de ofertas:</td>
             <td><!--<a href="excel" onclick="document.location.href='ficheroExcel.php?subasta=<?=$prod["sub_uid"]?>'; return false;" class="xls">
 				<img border="0" src="lib/ext/excel.png" alt="Excel" title="Excel" />
 					</a>--></td>
@@ -58,6 +61,7 @@ $prodTpl = $db->next_record();
 				<td width="25%" class="txt11 color2">Nombre de usuario:</td>
 				<td width="25%" class="txt11 color2">Fecha y hora:</td>
                                 <td width="25%" class="txt11 color2">Monto:</td>
+                                <td width="25%" class="txt11 color2">Monto con factor de ajuste:</td>
                                 <td width="25%" class="txt11 color2">Item:</td>
                                 <td width="25%" class="txt11 color2">Especificaci&oacute;n T&eacute;cnica:</td>
                                 
@@ -73,6 +77,7 @@ $prodTpl = $db->next_record();
 				<td width="25%"><?=$clientName?></td>
 				<td width="25%"><?=$content["bid_date"]?></td>
                                 <td width="25%"><?=$content["bid_mount"]?></td>
+                                <td width="25%"><?=$content["bid_mountxfac"]?></td>
                                 <td width="25%"><?=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delete=0");?></td>
                                 <td width="25%"><?php
                                 if(file_exists(PATH_ROOT."/docs/subasta/".$content["bid_doc"])){

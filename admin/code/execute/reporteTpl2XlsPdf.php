@@ -50,39 +50,6 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <tr><td width="21%">Monto Referencial:</td><td width="21%" align="left">'.$sub_mount_base.'</td><td width="6%"></td><td width="21%">Tiempo límite de mejora en min.:</td><td width="21%" align="left">'.$sub_tiempo.'</td></tr>
 <tr><td width="21%">Unidad de mejora:</td><td width="21%" align="left">'.$sub_mount_unidad.'</td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>
 <tr><td><br /><br /></td><td><br /><br a/></td></tr>
-<tr><td colspan="5"><h2>3: Listado de Oferta</h2></td></tr>
-<tr><td><br /></td><td><br /></td></tr>
-<tr><td colspan="5">
-	<table width="100%">';
-    	
-
-if($sub_modalidad=="TIEMPO"){
-$html.='<tr><th width="33%">Nombre de usuario:</th><th width="33%">Fecha y hora:</th><th width="33%">Monto:</th></tr>';
-
-$sql ="SELECT * FROM mdl_bid where bid_sub_uid='".$sub_uid."'";
-$db2->query($sql);	
-$i = 26;
-while ($secPart = $db2->next_record())
-{		
-     $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$secPart["bid_cli_uid"]."'");
-	 $html.= '<tr><td width="33%" align="center">'.$clientName.'</td><td width="33%" align="center">'.$secPart['bid_date'].'</td><td width="33%" align="center">'.$secPart['bid_mount'].'</td></tr>';
- }   
-}else{
-    
-  $html.='<tr><th width="25%">Nombre de usuario:</th><th width="25%">Fecha y hora:</th><th width="25%">Monto:</th><th width="25%">producto:</th></tr>';
-
-$sql ="SELECT * FROM mdl_biditem where bid_sub_uid='".$sub_uid."'";
-$db2->query($sql);	
-$i = 26;
-while ($secPart = $db2->next_record())
-{		
-     $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$secPart["bid_cli_uid"]."'");
-     $itemPr=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$secPart["bid_xit_uid"]." and xit_delte=0");
-	 $html.= '<tr><td width="25%" align="center">'.$clientName.'</td><td width="25%" align="center">'.$secPart['bid_date'].'</td><td width="25%" align="center">'.$secPart['bid_mount'].'</td><td width="25%" align="center">'.$itemPr.'</td></tr>';
- }  
-}
-$html.=	'</table>
-</td></tr>
 </table>
 </body>
 </html>

@@ -181,6 +181,64 @@ while ($secPart = $db2->next_record())
 </td>
 </tr>
 <tr>
+    <td colspan="5"><h2>4: Cuadro de Ofertas</h2></td>
+</tr>
+<tr>
+    <td colspan="5"><br /></td>
+</tr>
+<tr><td colspan="5">
+	<table width="100%">
+<?php
+if($sub_modalidad=="TIEMPO"){
+?>            
+    	<tr><th>Nombre de usuario:</th>
+            <th>Fecha y hora:</th>
+            <th>Monto:</th>
+            <th>Monto con factor de ajuste:</th>
+        </tr>
+<?php
+$sql ="SELECT * FROM mdl_bid where bid_sub_uid='".$sub_uid."'";
+$db2->query($sql);	
+$i = 26;
+while ($secPart = $db2->next_record())
+{		
+     $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$secPart["bid_cli_uid"]."'");
+     ?>
+	 <tr><td width="33%" align="center"><?=$clientName?></td>
+             <td width="33%" align="center"><?=$secPart['bid_date']?></td>
+             <td width="33%" align="center"><?=$secPart['bid_mount']?></td>
+             <td width="33%" align="center"><?=$secPart['bid_mountxfac']?></td></tr>
+    <?php         
+ }   
+}else{
+
+    ?>            
+    	<tr><th>Nombre de usuario:</th>
+            <th>Fecha y hora:</th>
+            <th>Monto:</th>
+            <th>Monto con factor de ajuste:</th>
+            <th>Item:</th></tr>
+<?php
+$sql ="SELECT * FROM mdl_biditem where bid_sub_uid='".$sub_uid."'";
+$db2->query($sql);	
+$i = 26;
+while ($secPart = $db2->next_record())
+{		
+     $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$secPart["bid_cli_uid"]."'");
+     $itemPr=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$secPart["bid_xit_uid"]." and xit_delte=0");
+     ?>
+	 <tr><td width="33%" align="center"><?=$clientName?></td>
+             <td width="33%" align="center"><?=$secPart['bid_date']?></td>
+             <td width="33%" align="center"><?=$secPart['bid_mount']?></td>
+             <td width="33%" align="center"><?=$secPart['bid_mountxfac']?></td>
+             <td width="33%" align="center"><?=$itemPr?></td></tr>
+    <?php 
+}
+}
+ ?>
+</table>
+</td></tr>
+<tr>
     <td colspan="5"><br /><br /><br /></td>
 </tr>
 <tr>
