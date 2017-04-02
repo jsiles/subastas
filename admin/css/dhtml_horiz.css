@@ -15,7 +15,7 @@ ul#navmenu {
   padding: 0;
   list-style: none;
   height: 31px;
-  z-index:1000;
+  z-index:900;
   
 }
 
@@ -28,7 +28,7 @@ ul#navmenu li {
   list-style: none;
   position: relative;
   height: 31px;
-    z-index:1000;
+    z-index:900;
 }
 
 ul#navmenu ul {
@@ -41,7 +41,7 @@ ul#navmenu ul {
   position: absolute;
   top: 30px;
   left: 0;
-    z-index:1000;
+    z-index:900;
 }
 
 ul#navmenu ul:after /*From IE 7 lack of compliance*/{
@@ -58,7 +58,7 @@ ul#navmenu ul li {
   float: left; /*For IE 7 lack of compliance*/
   display: block !important;
   display: inline; /*For IE*/
-    z-index:1000;
+    z-index:900;
 	
 }
 ul#navmenu li a#first  {
