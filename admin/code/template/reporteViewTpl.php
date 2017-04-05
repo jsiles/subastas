@@ -132,17 +132,12 @@ $montoAdjudicacion=admin::getDBvalue("SELECT sua_monto FROM mdl_subasta_informe 
     <td></td><td width="21%">Tiempo l&iacute;mite para ofertar en min.:</td>
     <td align="left"><?=$sub_tiempo?></td>
 </tr>
- <?php
-                        if($sub_modalidad!="PRECIO")
-                        {
-                        ?>
 <tr>
     <td >Unidad de mejora:</td>
     <td  align="left"><?=$sub_mount_unidad?></td>
     <td ></td><td width="21%"></td>
     <td ></td>
 </tr>
-                        <?php } ?>
 <tr>
     <td colspan="5"><br /><br /></td>
 </tr>
@@ -230,7 +225,7 @@ $i = 26;
 while ($secPart = $db2->next_record())
 {		
      $clientName=admin::getDBvalue("SELECT cli_socialreason FROM mdl_client where cli_uid='".$secPart["bid_cli_uid"]."'");
-     $itemPr=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$secPart["bid_xit_uid"]." and xit_delte=0");
+     $itemPr=admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$secPart["bid_xit_uid"]." and xit_delete=0");
      ?>
 	 <tr><td width="20%" align="center"><?=$clientName?></td>
              <td width="20%" align="center"><?=$secPart['bid_date']?></td>
