@@ -143,6 +143,25 @@ $prod = $db->next_record();
             <td valign="top"><?=admin::labels('status');?></td>
             <td><?php if ('ACTIVE'==$prod["sub_status"]) echo "Activo"; else echo "Inactivo";?></td>
           </tr>
+            <?php
+        $elaborado= admin::getDbValue("select concat(a.usr_firstname, ' ', a.usr_lastname) FROM sys_users a, mdl_subasta b where a.usr_uid=b.sub_usr_uid and b.sub_uid=".$prod["sub_uid"]);
+        
+        $aprobado = admin::getDbValue("select concat(a.usr_firstname, ' ', a.usr_lastname) FROM sys_users a, mdl_subasta_aprobar b where a.usr_uid=b.sup_user_uid and b.sup_sub_uid=".$prod["sub_uid"]);
+        ?>
+        
+        <tr>
+            <td valign="top">Proceso de compra elaborado por:</td>
+            <td><?=$elaborado?></td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td valign="top">Proceso de compra aprobado por:</td>
+            <td><?=$aprobado?></td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        
+          
         </table>
 
 		<!--TABLA IZQUIERDA END-->
