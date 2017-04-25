@@ -4,7 +4,7 @@ admin::initialize('reportes','reporteList',false);
 $pro_uid =admin::toSql(admin::getParam("pro"),"Number");
 $formato =admin::toSql(admin::getParam("type"),"String");
 
-$sql ="SELECT sub_sol_uid, pro_name,pca_name,pro_description,pro_quantity,pro_unidad,sub_status, sub_modalidad, sub_type, sub_hour_end, sub_mount_base, sub_mount_unidad, sub_tiempo, sub_uid 
+$sql ="SELECT pro_name,pca_name,pro_description,pro_quantity,pro_unidad,sub_status, sub_modalidad, sub_type, sub_hour_end, sub_mount_base, sub_mount_unidad, sub_tiempo, sub_uid 
 FROM mdl_subasta, mdl_product,mdl_pro_category
 WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_status='ACTIVE' and sub_uid='$pro_uid'";
 $db->query($sql);
@@ -23,7 +23,6 @@ while ($firstPart = $db->next_record())
 	$sub_mount_unidad=$firstPart['sub_mount_unidad'];
 	$sub_tiempo=$firstPart['sub_tiempo'];
 	$sub_uid=$firstPart['sub_uid'];
-        $sub_sol_uid  = $firstPart["sub_sol_uid"];
 }
 
 $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -39,8 +38,6 @@ $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <tr><td><br /><br /></td><td><br /><br /></td></tr>
 <tr><td colspan="5"><h2>1: Datos generales del proceso de compra</h2></td></tr>
 <tr><td><br /></td><td><br /></td></tr>
-<tr><td width="21%">Nro Solicitud:</td><td width="21%" align="left">'.$sub_sol_uid.'</td><td width="6%"></td><td width="21%"></td><td width="21%" align="left"></td></tr>
-<tr><td width="21%">Nro Proceso:</td><td width="21%" align="left">'.$sub_uid.'</td><td width="6%"></td><td width="21%"></td><td width="21%" align="left"></td></tr>
 <tr><td width="21%">Nombre:</td><td width="21%" align="left">'.$pro_name.'</td><td width="6%"></td><td width="21%">Cantidad:</td><td width="21%" align="left">'.$pro_quantity.'</td></tr>
 <tr><td width="21%">Categoria:</td><td width="21%" align="left">'.$pca_name.'</td><td width="6%"></td><td width="21%">Unidades:</td><td width="21%" align="left">'.$pro_unidad.'</td></tr>
 <tr><td width="21%">Descripcion:</td><td width="21%"></td><td width="6%"></td><td width="21%"></td><td width="21%"></td></tr>

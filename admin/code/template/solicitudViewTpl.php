@@ -47,30 +47,21 @@ $solEdit=$db->next_record();
                 <input name="tipUid" id="tipUid" value="<?=$tipUid?>" type="hidden" />
 
                   <span id="div_sub_unidad">
+                <select name="rav_uni_uid" id="rav_uni_uid" class="input" >
                 <?php
-                  $uUnidad = admin::getDbValue("select max(uni_uid) from mdl_unidad where uni_delete=0");
+                  $uUnidad = admin::getDbValue("select TOP 1 uni_uid from mdl_subasta_unidad where suu_sub_uid=".$prod["sub_uid"]);
                   $arrayUnidad = admin::dbFillArray("select uni_uid, uni_description from mdl_unidad where uni_delete=0 order by uni_uid");
                   if(is_array($arrayUnidad)){
                       $unidades=true;
                   foreach($arrayUnidad as $key=>$value)
                    {            
-                      
-                        if($key==$uUnidad) $nuevaLinea = "";
-                        else $nuevaLinea = "<br>";
-                        $valChecked=admin::getDbValue("select count(sou_uni_uid) from mdl_solicitud_unidad where sou_uni_uid=$key and sou_sol_uid=$sol_uid");
-                        if($valChecked>0)$selectUni ='checked="checked"';
-                        else $selectUni ="";
                         ?>
-                      <input name="rav_uni_uid[]" disabled="disabled" value="<?=$key?>" class="input" type="checkbox" <?=$selectUni?>>&nbsp;<span class="txt10"><?=$value?></span>&nbsp;<?=$nuevaLinea?>
+                      <option <?php if ($key==$uUnidad) echo 'selected="selected"';?> value="<?=$key?>"><?=$value?></option>				
                         <?php
                    }
-                  } else{
-                        $unidades=false;
-		?>
-                        <span class="txt10">No existen unidades.</span>&nbsp;
-                <?php
-                    }
-                ?>
+                  } 
+                  ?>
+                      </select>
                   </span>
                          
                 <!--<a href="javascript:addUnidad();" class="small2">agregar</a> | 
@@ -205,6 +196,23 @@ $solEdit=$db->next_record();
               	<option value="INACTIVE"><?=admin::labels('inactive');?></option>
 			</select>
 			<span id="div_sol_status" style="display:none;" class="error"></span></td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        <?php
+        $elaborado= admin::getDbValue("select concat(a.usr_firstname, ' ', a.usr_lastname) FROM sys_users a, mdl_solicitud_compra b where a.usr_uid=b.sol_usu_uid and b.sol_uid=".$solEdit["sol_uid"]);
+        
+        $aprobado = admin::getDbValue("select concat(a.usr_firstname, ' ', a.usr_lastname) FROM sys_users a, mdl_solicitud_aprobar b where a.usr_uid=b.soa_usr_uid and b.soa_sol_uid=".$solEdit["sol_uid"]);
+        ?>
+        
+        <tr>
+            <td valign="top">Solicitud elaborado por:</td>
+            <td><?=$elaborado?></td>
+                       <td width="7%">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td valign="top">Solicitud aprobado por:</td>
+            <td><?=$aprobado?></td>
                        <td width="7%">&nbsp;</td>
         </tr>
         
