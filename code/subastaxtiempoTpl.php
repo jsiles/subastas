@@ -27,19 +27,19 @@
 									
 									if(!$valBids) 
 								    {
-										$centavos=substr($details["sub_mount_base"],-3);
-										$montoGlobal=str_replace($centavos,'',$details["sub_mount_base"]);
+										//$centavos=substr($details["sub_mount_base"],-3);
+										$montoGlobal=$details["sub_mount_base"];
 										$valBids=$details["sub_mount_base"];
 										}
 									else
 									{
-										$centavos=substr($valBids,-3);
-										$montoGlobal=str_replace($centavos,'',$valBids);
+										//$centavos=substr($valBids,-3);
+										$montoGlobal=$valBids;
 										}
-									$centavos=str_replace('.','',$centavos);
+									//$centavos=str_replace('.','',$centavos);
 									
 								?>
-									<p class="left">Precio: <?=$moneda?>	<?=$montoGlobal?>.<sup><?=$centavos?></sup></p> <div class="clear"></div>
+                            <p class="left">Precio: <?=$moneda?>	<?=admin::numberFormat($montoGlobal)?></p> <div class="clear"></div>
                                    <?php
                                    if($factor>0)
 								   {
@@ -52,7 +52,7 @@
 									if($regBids>0)
 									{
 									?><p class="left">
-                                    Listado de pujas:<a href="<?=$domain?>/code/listBids.php?_keycode=<?=SymmetricCrypt::encrypt(base64_encode($details["sub_uid"]))?>" rel="facebox"><label><?=$regBids?></label> puja(s)</a>
+                                    Listado de ofertas:<a href="<?=$domain?>/code/listBids.php?_keycode=<?=SymmetricCrypt::encrypt(base64_encode($details["sub_uid"]))?>" rel="facebox"><label><?=$regBids?></label> puja(s)</a>
                                     <div class="clear"></div>
                                    <?php
 								   if(isset($regBidsWin))
@@ -114,7 +114,7 @@
 			}
 		?></p>
       
-									  <p id="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=$details["sub_mount_unidad"]?></p>
+                <p id="unidadmejora"><label class="bold">Unidad de Mejora:</label> <?=$moneda?> <?=admin::numberFormat($details["sub_mount_unidad"])?></p>
                                     
            <input type="hidden" name="hOk" id="hOk" value="" />
             <input type="hidden" name="domain" id="domain" value="<?=$domain?>" />
@@ -133,7 +133,7 @@
 					?>
                     <?php
 					 if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
-                    <p>Reglamento espec&iacute;fico de la compra:
+                    <p>Reglamento espec&iacute;fico del proceso:
 				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."/admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?>	
 						<p><?=utf8_encode($details["pro_description"])?></p>
 					</div>

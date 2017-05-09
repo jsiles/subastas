@@ -29,13 +29,13 @@
                                 <?php
 
 								   $bidsCompra=admin::getDBvalue("SELECT sub_type FROM mdl_subasta where sub_uid=".$xitem["xit_sub_uid"]);
-                                                                          $centavos=substr($xitem["xit_price"],-3);
-										$montoGlobal=str_replace($centavos,'',$xitem["xit_price"]);
-									$centavos=str_replace('.','',$centavos);
+                                                                        //  $centavos=substr($xitem["xit_price"],-3);
+										$montoGlobal=$xitem["xit_price"];
+									//$centavos=str_replace('.','',$centavos);
 									
 								?>
 									<p class="left">Precio Referencial:
-					       <?=$montoGlobal?>.<sup><?=$centavos?></sup></p> 
+					       <?=admin::numberFormat($montoGlobal)?></p> 
                                                                         <div class="clear"></div>
                                    <?php
                                    if($factor>0)
@@ -99,7 +99,7 @@
 					?>
                     <?php
 					 if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
-                    <p>Reglamento espec&iacute;fico de la compra:
+                    <p>Reglamento espec&iacute;fico del proceso:
 				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."../admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?>	
 					</div>
 				</div>`

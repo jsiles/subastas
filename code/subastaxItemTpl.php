@@ -42,21 +42,19 @@
 									
 									if(!$valBids) 
 								    {
-										$centavos=substr($xitem["xit_price"],-3);
-										$montoGlobal=str_replace($centavos,'',$xitem["xit_price"]);
+										$montoGlobal=$xitem["xit_price"];
 										$valBids=$xitem["xit_price"];
                                                                                 }
 									else
 									{
-                                                                            	$centavos=substr($valBids,-3);
-										$montoGlobal=str_replace($centavos,'',$valBids);
+                                                                            	$montoGlobal=$valBid;
                                                                                 }
 								
-									$centavos=str_replace('.','',$centavos);
+									
 									
 								?>
                             <p class="left">Precio: <?=$moneda?>&nbsp;</p>
-                            <div id="p_<?=$xitem["xit_uid"]?>" class="left"><?=$montoGlobal?>.<?=$centavos?></div> <div class="clear"></div>
+                            <div id="p_<?=$xitem["xit_uid"]?>" class="left"><?= admin::numberFormat($montoGlobal)?></div> <div class="clear"></div>
                                    <?php
                                    if($factor>0)
 								   {
@@ -132,7 +130,7 @@
 					?>
                     <?php
 					 if ((strlen($imgextension)>0)&&(strlen($details["pro_document"])>0)) { ?>
-                    <p>Reglamento espec&iacute;fico de la compra:
+                    <p>Reglamento espec&iacute;fico del proceso:
 				  <a href="<?=$domain?>/docs/subasta/<?=$details["pro_document"]?>" target="_blank"><img border="0" src="<?=$domain."../admin/".$imgextension?>" width="16" height="16"/><!-- <?=$details["pro_document"]?>--></a></p><?php } ?>	
 						<p><?=utf8_encode($details["pro_description"])?></p>
 					</div>
