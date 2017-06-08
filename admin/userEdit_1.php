@@ -1,6 +1,6 @@
 <?php 
 include ("core/admin.php");
-admin::initialize('banners','bannerEdit');
+admin::initialize('users','usersEdit');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>
@@ -17,20 +17,25 @@ admin::initialize('banners','bannerEdit');
 <meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
 <META HTTP-EQUIV="Content-Type" content="text/html; ISO-8859-1">
-<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
+<script language="javascript" type="text/javascript" src="js/users.js"></script>
+<script language="javascript" type="text/javascript" src="js/pass.js"></script>
 <!-- TOOLTIPS DE ACRONYM -->
 <script language="javascript" type="text/javascript" src="js/addEvent.js"></script>
 <script language="javascript" type="text/javascript" src="js/sweetTitles.js"></script>
 <link rel="stylesheet" href="css/sweetTitles.css" type="text/css" />
 <!-- FIN -->
+
 <!-- PROMPT -->
+<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="js/jquery.Impromptu.js"></script>
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
 <!-- FIN PROMPT -->
+
 <script type="text/javascript">
 function removeImg(id){
-	var txt = '&iquest;Est&aacute; seguro de eliminar la imágen?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	var txt = '¿<?=admin::labels('imagequestion');?>?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
 	$.prompt(txt,{
 		show:'fadeIn' ,
 		opacity:0,
@@ -43,11 +48,11 @@ function removeImg(id){
 				  $('#image_edit_'+uid).fadeOut(1, function(){ $(this).remove(); });
 				  
 					  $.ajax({
-						url: 'code/execute/bannerImageDel.php?token=<?=admin::getParam("token");?>',
+						url: 'code/execute/usersImageDel.php?token=<?=admin::getParam("token");?>',
 						type: 'POST',
 						data: 'uid='+uid
 					});
-					document.getElementById('image_add_'+uid).innerHTML = '<input type="file" name="ban_adjunt" id="ban_adjunt" size="32" class="input"><span id="div_ban_adjunt" class="error" style="display:none">Solo extenciones bmp, jpg, jpeg, gif, png, swf</span>';
+					document.getElementById('image_add_'+uid).innerHTML = '<input type="file" name="use_image" id="use_image" size="32" class="input">';
 					$('#image_add_'+uid).fadeIn(700);
 			}
 			else{}
@@ -56,12 +61,15 @@ function removeImg(id){
 	});
 }
 </script>
+
+
+</head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/bannerEditTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/userEditTpl_1.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>

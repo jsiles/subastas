@@ -1,5 +1,6 @@
-RewriteEngine Off
-Options -Indexes
+#RewriteEngine Off
+RewriteEngine On
+Options +FollowSymlinks -Indexes
 Options -ExecCGI
 <filesMatch "\.(js|js?version=1.2|css)$">
   FileETag None
