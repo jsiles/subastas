@@ -7,7 +7,7 @@ $timeNow= date("Y-m-d H:i:s");//sub_finish<>0
 //echo $timeNow;
 if ($search2!='')
 {
-	$Where="and (sub_description like '%".$search2."%' or pro_name like '%".$search2."%')";
+	$Where=" and (sub_description like '%".$search2."%' or pro_name like '%".$search2."%')";
 }
 
 
@@ -58,8 +58,9 @@ $GroupBy =" GROUP BY sub_mount_base, sub_modalidad, sub_moneda, pro_uid, pro_nam
 //echo $qsearch;
 
 $order= admin::toSql(admin::getParam("order"),"Number");
-if ($order) admin::setSession("order",$order);
-else $order=admin::getSession("order");
+if(!isset($order)) $order=0;
+/*if ($order) admin::setSession("order",$order);
+else $order=admin::getSession("order");*/
 
 if ($order==0) {$orderCode=' order by pro_uid desc'; $uidClass='down'; $nameClass='up'; $linClass='up';}
 elseif ($order==1) {$orderCode='  order by pro_uid asc'; $uidClass='up'; $nameClass='up'; $linClass='up';}
@@ -137,11 +138,12 @@ if ($nroReg>0)
       <td colspan="2" width="100%">
   <table width="100%" border="0">
 	<tr>
-	<td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
-        <td width="10%"><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
-        <td width="10%"><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
+            <td width="10%"><a href="subastasList.php?order=<?=$uidOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>" class="<?=$uidClass;?>"><?=admin::labels('code');?>:</a></td>
+        <td width="10%"><a href="subastasList.php?order=<?=$nameOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>" class="<?=$nameClass;?>"><?=admin::labels('name');?>:</a></td>
+        <td width="10%"><a href="subastasList.php?order=<?=$linOrder?><?=$searchURL?>&token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>" class="<?=$linClass;?>"><?=admin::labels('category');?>:</a></td>
         <td width="10%"><span class="txt11 color2">Estado:</span></td>
         <td width="10%"><span class="txt11 color2">Unidad Solicitante</span></td>
+        <td width="5%" align="center"><span class="txt11 color2">Monto</span></td>
         <td width="5%">&nbsp;</td>		
 	<td width="5%">&nbsp;</td>
 	<td width="5%">&nbsp;</td>
@@ -185,7 +187,7 @@ while ($subasta_list = $pagDb->next_record())
             $countBids=admin::getDBvalue("SELECT count(*) FROM mdl_bid where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0");
         
         }
-       
+       $monedaLit =admin::getDbValue("select cur_description from mdl_currency where cur_uid=$sub_moneda");
         
         if(($deadtime=='subastandose')&&($sub_finish==1)) $sub_finish=2;
         if(($countBids==0)&&($sub_finish==3)) $sub_finish=7;
@@ -264,10 +266,11 @@ while ($subasta_list = $pagDb->next_record())
     <table class="list" width="100%" style="">
 	<tr>
 		<td width="10%" ><span <?=$dest?>><?=admin::toHtml($sub_uid)?></span></td>
-        <td width="10%" ><span <?=$dest?>><?=ucfirst(strtolower(trim(admin::toHtml($pro_name))))?></span></td>
-        <td width="10%" ><span <?=$dest?>><?=ucwords(strtolower(trim(admin::toHtml($pca_name))))?></span></td>
+        <td width="10%" ><span <?=$dest?>><?=$pro_name?></span></td>
+        <td width="10%" ><span <?=$dest?>><?=$pca_name?></span></td>
         <td width="10%" ><span><?=$sub_estado?></span></td>
 	<td align="left" width="10%" height="5"><span><?=$rav_unidad?></span>
+        <td width="5%" align="right"><span><?=$sub_monto." ".$monedaLit?></span></td>
          <?php
 		 
 		/* if ($countBids>0){

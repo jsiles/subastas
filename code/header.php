@@ -29,40 +29,27 @@ function checkTime(i) {
 }
 </script>
 <div id="top-header" class="container">
-			<div id="logo">
+    <div id="top-banner">
+                            <div id="logo" style="float:left">
 				<h1><a href="<?=$domain?>" >SISTEMA ELECTR&Oacute;NICO DE ADQUISICIONES Y REGISTRO DE PROVEEDORES</a></h1>
 				<p></p>
 			</div>
-				
-			<div id="top-banner">
-                            <div id="colC">&nbsp;</div>
-                            <div id="colA" style="float:center">
+                            
+					<?php if($uidClient){?>
+                <div id="colB" style="float:right">
+                    <p><a href="<?=$domain?>/logout.php"></a></p>
+                    <a href="<?=$domain."/registro/".$uidClient."/"?>" alt="Cambiar Contrase&ntilde;a" title="Cambiar Contrase&ntilde;a"><img width="30" src="<?=$domain."/lib/pencil.png"?>" alt="Cambiar Contrase&ntilde;a" title="Cambiar Contrase&ntilde;a" /></a>
+                    <a href="<?=$domain."/registro/".$uidClient."/"?>" alt="Cambiar Contrase&ntilde;a" title="Cambiar Contrase&ntilde;a"><br />Bienvenido<br /> <?=$name?></a>
+                    
+                                   </div>
+                <?php } ?>
+    <div id="colA" style="float:center">
                     <?php if($imgs){?>
 					<img src="<?=$domain?>/img/banner/img_<?=$imgs?>?<?=time()?>" alt="<?=$ban_name?>" title="<?=$ban_name?>" border="0"/>
                     <?php }?>
 				</div>
-				<?php if($uidClient){?>
-                <div id="colB" style="float:right">
-                    <table align="right" width="50%" border="0">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td><p><a href="<?=$domain?>/logout.php"></a></p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td align="center"><a href="<?=$domain."/registro/".$uidClient."/"?>" alt="Cambiar Contrase&ntilde;a" title="Cambiar Contrase&ntilde;a"><img width="30" src="<?=$domain."/lib/pencil.png"?>" alt="Cambiar Contrase&ntilde;a" title="Cambiar Contrase&ntilde;a" /></a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><a href="<?=$domain."/registro/".$uidClient."/"?>" alt="Cambiar Contrase&ntilde;a" title="Cambiar Contrase&ntilde;a"><br />Bienvenido<br /> <?=$name?></a></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                    
-                                   </div>
-                <?php } ?>
-			</div>
-		</div>
+				
+			
 		
+</div>
+</div>		

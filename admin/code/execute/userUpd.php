@@ -5,15 +5,15 @@ include_once("../../core/files.php");
 include_once("../../core/images.php");
 admin::initialize('users','usersEdit',false);
 
-$use_uidA = $_POST["use_uidA"];
-$usr_loginA = admin::toSql(safeHtml($_POST["usr_login"]),"String");
-$usr_passA = $_POST["usr_pass"];
-$usr_firstnameA = admin::toSql(safeHtml($_POST["usr_firstname"]),"String");
-$usr_lastnameA = admin::toSql(safeHtml($_POST["usr_lastname"]),"String");
-$usr_emailA = admin::toSql(safeHtml($_POST["usr_email"]),"String");
-$usr_photoA = admin::toSql(safeHtml($_POST["usr_photo"]),"String");
-$usr_statusA = admin::toSql(safeHtml($_POST["usr_status"]),"String");
-$usr_rolA = admin::toSql(safeHtml($_POST["usr_rol"]),"Number");
+$use_uidA = admin::toSql(admin::getParam("use_uidA"),"Text");
+$usr_loginA = admin::toSql(admin::getParam("usr_login"),"String");
+$usr_passA = admin::toSql(admin::getParam("usr_pass"),"Text");
+$usr_firstnameA = admin::toSql(admin::getParam("usr_firstname"),"String");
+$usr_lastnameA = admin::toSql(admin::getParam("usr_lastname"),"String");
+$usr_emailA = admin::toSql(admin::getParam("usr_email"),"String");
+$usr_photoA = admin::toSql(admin::getParam("usr_photo"),"String");
+$usr_statusA = admin::toSql(admin::getParam("usr_status"),"String");
+$usr_rolA = admin::toSql(admin::getParam("usr_rol"),"Number");
 if ($usr_passA!=""){ $changepassA = "usr_pass='" . md5($usr_passA) . "',";}
 
 
@@ -72,7 +72,7 @@ if ($validFile && $FILES['error']==0)
                                            // echo $urlSite;die;
             header("Location: ".PATH_DOMAIN."/admin/".$urlSite);
             }else { //echo "@@";die;
-                header("Location: ".PATH_DOMAIN."/index.php");
+                header("Location: ".PATH_DOMAIN."/admin/index.php?token=".$token);
             }
         }
         else {

@@ -19,9 +19,9 @@
 //echo $timeSubasta;
 								   $bidsCompra=admin::getDBvalue("SELECT sub_type FROM mdl_subasta where sub_uid=".$details["sub_uid"]);
 									if($bidsCompra=='COMPRA') 
-									$valBids=admin::getDBvalue("SELECT min(bid_mount) FROM mdl_bid where bid_pro_uid='".$details["pro_uid"]."'");
+									$valBids=admin::getDBvalue("SELECT min(bid_mountxfac) FROM mdl_bid where bid_pro_uid='".$details["pro_uid"]."'");
 									else
-									$valBids=admin::getDBvalue("SELECT max(bid_mount) FROM mdl_bid where bid_pro_uid='".$details["pro_uid"]."'");
+									$valBids=admin::getDBvalue("SELECT max(bid_mountxfac) FROM mdl_bid where bid_pro_uid='".$details["pro_uid"]."'");
 									$factor = admin::getDbValue("select inc_ajuste from mdl_incoterm where inc_delete=0 and inc_cli_uid=".admin::getSession("uidClient")." and inc_sub_uid=".$details["sub_uid"]);
                         						$regBids = admin::getDbValue("select count(*) from mdl_bid where bid_sub_uid = ".$details["sub_uid"]);
 									
@@ -49,7 +49,7 @@
 									if($regBids>0)
 									{
 									?><p class="left">
-                                    Listado de ofertas:<a href="<?=$domain?>/code/listBids.php?_keycode=<?=SymmetricCrypt::encrypt(base64_encode($details["sub_uid"]))?>" rel="facebox"><label><?=$regBids?></label> puja(s)</a>
+                                    Listado de ofertas:<a href="<?=$domain?>/code/listBids.php?_keycode=<?=SymmetricCrypt::encrypt(base64_encode($details["sub_uid"]))?>" rel="facebox"><label><?=$regBids?></label> oferta(s)</a>
                                     <div class="clear"></div>
                                    <?php
 								   if(isset($regBidsWin))
@@ -96,7 +96,7 @@
 										<form name="frmContact" id="formA" action="" method="post">
 		<p id="subastaP" style="display:none;">
 			<label class="bold">Oferta:</label>
-                        <input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfert();" class="inputB"/> <a href="<?=$domain?>/code/bidsIt.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" rel="facebox" class="addcart">Ofertar</a>
+                        <input name="ct_value" id="ct_value" type="text" size="15" onKeyUp="valOfert();" class="inputB"/> <a href="<?=$domain?>/code/bids.php?uid=<?=$details["sub_uid"]?>" id="planCuentas" rel="facebox" class="addcart">Ofertar</a>
         (Ingrese <?php 
 		if($bidsCompra=='COMPRA')
 		{

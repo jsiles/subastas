@@ -35,7 +35,9 @@ $aprobado = admin::getDbValue("select concat(a.usr_firstname, ' ', a.usr_lastnam
 $obs=admin::getDBvalue("SELECT sua_observaciones FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $montoAhorro=admin::getDBvalue("SELECT sua_ahorro FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
 $montoAdjudicacion=admin::getDBvalue("SELECT sua_monto FROM mdl_subasta_informe where sua_sub_uid='".$sub_uid."'");
-
+$elaboradoDate= admin::getDbValue("select top 1 sua_date FROM sys_users a, mdl_subasta_informe b where a.usr_uid=b.sua_user_uid and b.sua_sub_uid=".$sub_uid);
+$aprobadoDate = admin::getDbValue("select top 1 sua_dateApr FROM sys_users a, mdl_subasta_informe b where a.usr_uid=b.sua_usr_apr and b.sua_sub_uid=".$sub_uid);
+        
 $html= '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -152,9 +154,68 @@ while ($secPart = $db2->next_record())
 
 }
 }
+
 $html.='</table>
+</td></tr>';
+if($sub_modalidad!="TIEMPO"){
+$html.=' 
+<tr>
+    <td colspan="5"><h2>5: Cuadro Resumen</h2></td>
+</tr>
+<tr>
+    <td colspan="5"><br /></td>
+</tr>
+<tr><td colspan="5">
+	<table width="100%">
+                        <tr>
+				<th>Item:</th>
+				<th>Precio Base:</th>
+                                <th>Precio Ofertado:</th>
+                                <th>Beneficio Obtenido:</th>
+                        </tr>   ';      
+               
+				$sql2 = "SELECT bid_xit_uid FROM mdl_biditem where bid_sub_uid='".$sub_uid."' and bid_cli_uid!=0 group by bid_xit_uid";
+				$db2->query($sql2);
+                                $subTotalMontoBase=0;
+                                $subTotalMontoWin=0;
+                                $subTotalMontoBeneficio=0;
+                                $montoBen=0;
+				while ($content=$db2->next_record())
+				{
+
+                                    if($subType=="COMPRA") $sqlType="min(bid_mountxfac)";else $sqlType="max(bid_mountxfac)"; 
+                                    $montoWin =admin::getDbValue("select ".$sqlType." from mdl_biditem where bid_xit_uid =". $content["bid_xit_uid"]." group by bid_xit_uid");
+                                    if(!isset($montoWin)) $montoWin=0;
+                                    $montoBase =  admin::getDBvalue("SELECT xit_price from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delete=0");
+                                    $descrip = admin::getDBvalue("SELECT xit_description from mdl_xitem where xit_uid=".$content["bid_xit_uid"]." and xit_delete=0");
+                                    if(($subType=="COMPRA")) { $montoBen = $montoBase-$montoWin;} else {$montoBen =$montoWin-$montoBase;}
+                                    $subTotalMontoBase+=$montoBase;
+                                    $subTotalMontoWin+=$montoWin;
+                                    $subTotalMontoBeneficio+=$montoBen;
+$html.='                    <tr>
+				<td width="20%" align="left">'.$descrip.'</td>
+                                <td width="20%" align="right">'.admin::numberFormat($montoBase).'</td>
+                                <td width="20%" align="right">'.admin::numberFormat($montoWin).'</td>
+                                <td width="20%" align="right">'.admin::numberFormat($montoBen).'</td>
+                            </tr>';
+             			 }
+$html.='                    <tr>
+				<td width="20%" align="left" style="font-weight: bold">Total</td>
+                                <td width="20%" align="right" style="font-weight: bold">'.admin::numberFormat($subTotalMontoBase).'</td>
+                                <td width="20%" align="right" style="font-weight: bold">'.admin::numberFormat($subTotalMontoWin).'</td>
+                                <td width="20%" align="right" style="font-weight: bold">'.admin::numberFormat($subTotalMontoBeneficio).'</td>
+                            </tr>';
+$html.='		
+        </table>
 </td></tr>
-<tr><td><br /><br /><br /></td><td><br /></td></tr>
+<tr>
+    <td colspan="5"><br /><br /><br /></td>
+</tr>';
+}
+$html.='<tr><td><br /><br /><br /></td><td><br /></td></tr>
+<tr>
+    <td colspan="5"><h2>6: Informe Proceso de Compra</h2></td>
+</tr>
 <tr><th colspan="5" align="left">Monto Adjudicaci&oacute;n:</th></tr>
 <tr><td colspan="5" align="left">'.$montoAdjudicacion.'</td></tr>
 <tr><th colspan="5" align="left">Monto Ahorro:</th></tr>
@@ -162,7 +223,7 @@ $html.='</table>
 <tr><th colspan="5" align="left">Observaciones:</th></tr>
 <tr><td colspan="5" align="left">'.$obs.'</td></tr>
 <tr><td><br /><br /><br /><br /></td><td><br /><br /><br /><br /></td></tr>
-<tr><th align="center" width="50%">'.$elaborado.'<br />Elaborado</th><th align="center" width="50%">'.$aprobado.'<br />Aprobado</th>
+<tr><th align="center" width="50%">'.$elaborado.'<br />Elaborado<br />'.$elaboradoDate.'</th><th align="center" width="50%">'.$aprobado.'<br />Aprobado<br />'.$aprobadoDate.'</th>
 </table>
 </body>
 </html>

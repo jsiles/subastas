@@ -400,10 +400,23 @@ $prod = $db->next_record();
 				<input name="sub_tiempo" type="text" class="input" id="sub_sub_tiempo" onfocus="setClassInput(this,'ON');document.getElementById('div_sub_mount_unidad').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_sub_mount_unidad').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_sub_mount_unidad').style.display='none';" size="9" value="<?=$prod["sub_tiempo"]?>"/>
 				<br /><span id="div_sub_tiempo" style="display:none; padding-left:5px; padding-right:5px;" class="error"></span>
 				</td>
-			</tr>	
+			</tr>
+                        <?php
+                        $xhoras =  admin::getDbValue("select nop_tiempo from mdl_notificacion_previa where nop_sub_uid=".$prod["sub_uid"]);
+                        ?>
+                        <tr>
+				<td>Notificaci&oacute;n N horas antes:</td>
+				<td>
+				<input name="xhoras" type="text" class="input" id="xhoras" onfocus="setClassInput(this,'ON');document.getElementById('div_sub_mount_unidad').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_sub_mount_unidad').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_sub_mount_unidad').style.display='none';" size="3"  value="<?=$xhoras?>"/>
+				<br /><span id="div_xhoras" style="display:none; padding-left:5px; padding-right:5px;" class="error"></span>
+				</td>
+			</tr>
+
 		<tr><td colspan="2">
                                   <?php $uidTpl=$prod["sub_uid"];
-                                  include("./code/execute/listadoOfertas.php");?>
+                                  include("./code/execute/listadoOfertas.php");
+                                  include("./code/execute/cuadroResumen.php");
+                                  ?>
         </td></tr>	
    </table>
 		<!--TABLA DERECHA END-->
@@ -600,9 +613,9 @@ while ($list = $db2->next_record())
 <table class="list" width="100%">
 	<tr>
     <td width="12%"><?=$cli_name?></td>
-    <td width="12%"><?=utf8_decode($inc_lugar_entrega)?></td>
-    <td width="12%"><?=utf8_decode($tra_name)?></td>
-    <td width="12%"><?=utf8_decode($inl_name)?></td>
+    <td width="12%"><?=$inc_lugar_entrega?></td>
+    <td width="12%"><?=$tra_name?></td>
+    <td width="12%"><?=$inl_name?></td>
     <?php
     if($prod["sub_type"]!='VENTA'){
     ?>
