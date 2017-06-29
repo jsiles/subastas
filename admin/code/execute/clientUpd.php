@@ -5,32 +5,32 @@ include_once("../../core/images.php");
 include_once("../../../classes/class.SymmetricCrypt.inc.php");
 admin::initialize('client','clientEdit',false);
 
-$cli_uid = admin::toSql(safeHtml($_POST["cli_uid"]),"String");
-$cli_interno = admin::toSql(safeHtml($_POST["cli_interno"]),"String");
-$cli_lec_uid = admin::toSql(safeHtml($_POST["cli_lec_uid"]),"String");
-$cli_cov_uid = admin::toSql(safeHtml($_POST["cli_cov_uid"]),"String");
-$cli_socialreason = admin::toSql(safeHtml($_POST["cli_socialreason"]),"String");
-$cli_legaldirection = admin::toSql(safeHtml($_POST["cli_legaldirection"]),"String");
-$cli_phone = admin::toSql(safeHtml($_POST["cli_phone"]),"String");
-$cli_mainemail = admin::toSql(safeHtml($_POST["cli_mainemail"]),"String");
-$cli_commercialemail = admin::toSql(safeHtml($_POST["cli_commercialemail"]),"String");
-$cli_legal_ci = admin::toSql(safeHtml($_POST["cli_legal_ci"]),"String");
-$cli_legalname = admin::toSql(safeHtml($_POST["cli_legalname"]),"String");
-$cli_legallastname = admin::toSql(safeHtml($_POST["cli_legallastname"]),"String");
-$cli_legal_ci2 = admin::toSql(safeHtml($_POST["cli_legal_ci2"]),"String");
-$cli_legalname2 = admin::toSql(safeHtml($_POST["cli_legalname2"]),"String");
-$cli_legallastname2 = admin::toSql(safeHtml($_POST["cli_legallastname2"]),"String");
-$cli_legal_ci3 = admin::toSql(safeHtml($_POST["cli_legal_ci3"]),"String");
-$cli_legalname3 = admin::toSql(safeHtml($_POST["cli_legalname3"]),"String");
-$cli_legallastname3 = admin::toSql(safeHtml($_POST["cli_legallastname3"]),"String");
-$cli_commercialname = admin::toSql(safeHtml($_POST["cli_commercialname"]),"String");
-$cli_commerciallastname = admin::toSql(safeHtml($_POST["cli_commerciallastname"]),"String");
-$cli_user = admin::toSql(safeHtml($_POST["cli_user"]),"String");
-$cli_pass = md5(admin::toSql(safeHtml($_POST["cli_pass"]),"String"));
-$cli_pts_uid = admin::toSql(safeHtml($_POST["cli_pts_uid"]),"String");
+$cli_uid = admin::toSql(safeHtml(admin::getParam("cli_uid")),"Text");
+$cli_interno = admin::toSql(safeHtml(admin::getParam("cli_interno")),"Text");
+$cli_lec_uid = admin::toSql(safeHtml(admin::getParam("cli_lec_uid")),"Text");
+$cli_cov_uid = admin::toSql(safeHtml(admin::getParam("cli_cov_uid")),"Text");
+$cli_socialreason = admin::toSql(safeHtml(admin::getParam("cli_socialreason")),"Text");
+$cli_legaldirection = admin::toSql(safeHtml(admin::getParam("cli_legaldirection")),"Text");
+$cli_phone = admin::toSql(safeHtml(admin::getParam("cli_phone")),"Text");
+$cli_mainemail = admin::toSql(safeHtml(admin::getParam("cli_mainemail")),"Text");
+$cli_commercialemail = admin::toSql(safeHtml(admin::getParam("cli_commercialemail")),"Text");
+$cli_legal_ci = admin::toSql(safeHtml(admin::getParam("cli_legal_ci")),"Text");
+$cli_legalname = admin::toSql(safeHtml(admin::getParam("cli_legalname")),"Text");
+$cli_legallastname = admin::toSql(safeHtml(admin::getParam("cli_legallastname")),"Text");
+$cli_legal_ci2 = admin::toSql(safeHtml(admin::getParam("cli_legal_ci2")),"Text");
+$cli_legalname2 = admin::toSql(safeHtml(admin::getParam("cli_legalname2")),"Text");
+$cli_legallastname2 = admin::toSql(safeHtml(admin::getParam("cli_legallastname2")),"Text");
+$cli_legal_ci3 = admin::toSql(safeHtml(admin::getParam("cli_legal_ci3")),"Text");
+$cli_legalname3 = admin::toSql(safeHtml(admin::getParam("cli_legalname3")),"Text");
+$cli_legallastname3 = admin::toSql(safeHtml(admin::getParam("cli_legallastname3")),"Text");
+$cli_commercialname = admin::toSql(safeHtml(admin::getParam("cli_commercialname")),"Text");
+$cli_commerciallastname = admin::toSql(safeHtml(admin::getParam("cli_commerciallastname")),"Text");
+$cli_user = admin::toSql(safeHtml(admin::getParam("cli_user")),"Text");
+$cli_pass = md5(admin::toSql(safeHtml(admin::getParam("cli_pass")),"Text"));
+$cli_pts_uid = admin::toSql(safeHtml(admin::getParam("cli_pts_uid")),"Text");
 $item_uid = admin::getParam("nivel1_uid");
 $cli_ite_uid =  admin::getParam("nivel2_uid");
-$cli_status = admin::toSql(safeHtml($_POST["cli_status"]),"String");	
+$cli_status = admin::toSql(safeHtml(admin::getParam("cli_status")),"Text");	
 $cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
 
 $sql = "update mdl_client set
@@ -63,7 +63,7 @@ $sql = "update mdl_client set
 		where cli_uid=".$cli_uid;
 $db->query($sql);
 
-	$cli_doc_uid = admin::getParam("cli_doc_uid");
+	$cli_doc_uid = admin::getParam("cli_doc_uid","strip");
    	if (is_array($cli_doc_uid)){
              $sql = "delete from mdl_documentsclient where dcl_cli_uid='".$cli_uid."'";
     $db->query($sql);
@@ -104,15 +104,20 @@ if ($validFile && $FILES['error']==0)
 	$nomIMG2="thumb_".$nomIMG;
 	// Subimos el archivo con el nombre original
 	classfile::uploadFile($FILES,PATH_ROOT.'/img/client/',$fileName);
-	// redimencionamos al mismo pero con extencion jpg en el mismo tamaño
 	redimImgPercent(PATH_ROOT."/img/client/".$fileName, PATH_ROOT."/img/client/".$nomIMG,100,100);
-	// Redimencionamos el nuevo jpg por el ancho definido
 	redimImgWH(PATH_ROOT."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,60,100);
+        copy(PATH_ROOT."/img/client/".$nomIMG,PATH_PUBLIC."/img/client/".$nomIMG);
+        copy(PATH_ROOT."/img/client/".$nomIMG2,PATH_PUBLIC."/img/client/".$nomIMG2);
+        unlink(PATH_ROOT."/img/client/".$fileName);
+        
+        /*
+	redimImgPercent(PATH_PUBLIC."/img/client/".$fileName, PATH_ROOT."/img/client/".$nomIMG,100,100);
+	redimImgWH(PATH_PUBLIC."/img/client/".$nomIMG, PATH_ROOT."/img/client/".$nomIMG2,60,100);*/
 	// Redimencionamos el nuevo jpg por el ancho definido
 	$sql = "UPDATE mdl_client SET cli_logo='".$nomIMG."' WHERE cli_uid=".$cli_uid;
 	$db->query($sql);
 	}
 $token=admin::getParam("token");		
 	
-header('Location: ../../clientList.php?token='.$token);		
+header('Location: ../../clientList.php');		
 ?>
