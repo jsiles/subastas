@@ -1,6 +1,6 @@
 <?php
 include_once ("../../core/admin.php"); 
-admin::initialize('users','usersList',false);
+admin::initialize('client','clientList',false);
 $pts_uid = admin::toSql(admin::getParam("uid"),"String");
 $Exists = admin::getDbValue("SELECT count(distinct wtp_uid) FROM mdl_waytopay where wtp_pts_uid='".$pts_uid."'");
 
@@ -8,7 +8,7 @@ if ($Exists>0)
 {	 
 ?>
 <table width="92%" class="box">
-<?
+<?php
 $sql = "select wtp_uid, wtp_name from mdl_waytopay where wtp_delete=0 and wtp_pts_uid='".$pts_uid."'";
 			$db2->query($sql);
 			while ($content=$db2->next_record())
@@ -22,10 +22,10 @@ $sql = "select wtp_uid, wtp_name from mdl_waytopay where wtp_delete=0 and wtp_pt
 			</td>
             <td width="7%">&nbsp;</td>
           </tr>
-<? 
+<?php 
 			}
 ?>			
 </table>
-<?
+<?php
 }
 ?>
