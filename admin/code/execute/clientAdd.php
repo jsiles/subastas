@@ -104,6 +104,7 @@ if($cli_exist==0){
 								0,
 								GETDATE()
 								)";
+//        echo $sql;die;
 	$db->query($sql);
 
 	$cli_uid = admin::getDBvalue("select cli_uid FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
@@ -162,5 +163,5 @@ if ($validFile && $FILES['error']==0)
 }
         $token=admin::getParam("token");		
 	
-header('Location: ../../clientList.php');
+header('Location: ../../clientList.php?token='.$token);
 ?>

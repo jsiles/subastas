@@ -18,7 +18,13 @@ admin::initialize('client','clientNew');
 <META NAME="rating" CONTENT="General">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; ISO-8859-1">
 <script type="text/javascript">var SERVER='<?=$domain?>'; </script>
-<script type="text/javascript" src="js/jquery.js"></script>
+<!--Buscador proveedore -->
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.11.4.css">
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.11.4.custom.js"></script>
+<!--END BUSCADOR-->
+
+<!--<script type="text/javascript" src="js/jquery.js"></script>-->
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/pass.js?version=<?=VERSION?>"></script>
 <!-- TOOLTIPS DE ACRONYM -->
@@ -31,7 +37,39 @@ admin::initialize('client','clientNew');
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
 <script type="text/javascript" src="js/jquery.Impromptu.js"></script>
 <!--ENDIMPROMTU--> 
+<script type="text/javascript">
+   $(function() {
+    
+    $( ".proveedor" ).autocomplete({
+        source: 'code/execute/searchProvSAP.php',
+        select: function(event, ui) {
+            
+        $("#inputProveedor").append('<label>'+ui.item.nit+'</label><br>  ');
+        $("#cli_nit_ci").val(ui.item.nit);
+        $("#cli_nit_ci").attr('class','input');
+        $("#busqueda").hide();
+        $("#cli_interno").val(ui.item.id);
+        $("#div_cli_interno").hide();
+      //  $("#cli_interno").attr('disabled','disabled');
+        $("#cli_socialreason").val(ui.item.label);
+        $("#div_cli_socialreason").hide();
+      //  $("#cli_socialreason").attr('disabled','disabled');
+        $("#cli_legaldirection").val(ui.item.street);
+        $("#botonRegistrar").show();
+        $("#botonOr").show();
+        $("#botonCancelar").attr('class', '');
 
+        //$("#busqueda").hide();
+        return false; // Prevent the widget from inserting the value.
+        
+    },
+    focus: function(event, ui) {
+        $(".proveedor").val('');
+        return false; // Prevent the widget from inserting the value.
+    }
+    })
+ })  
+</script>
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

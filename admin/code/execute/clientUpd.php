@@ -119,5 +119,5 @@ if ($validFile && $FILES['error']==0)
 	}
 $token=admin::getParam("token");		
 	
-header('Location: ../../clientList.php');		
+header('Location: ../../clientList.php?token='.$token);		
 ?>

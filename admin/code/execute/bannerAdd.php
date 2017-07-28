@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("../../core/admin.php");
 include_once("../../core/files.php");
 include_once("../../core/images.php");
