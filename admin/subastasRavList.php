@@ -26,6 +26,12 @@ switch($tipUid){
             $moduleListId=35;
             $moduleCrearId=36; 
             break;
+    case 5: $opcionMenu = "subastaRavParametros2";
+            $opocionSubMenu ="subastasRavList2";
+            $etiquetaCrear = "subastasRavNew2";
+            $moduleListId=59;
+            $moduleCrearId=60; 
+            break;
     default :
             $opcionMenu = "subastaRavParametros";
             $opocionSubMenu ="subastasRavList";

@@ -236,9 +236,22 @@ if ($FILES2["name"] != '')
 $token=admin::getParam("token");
 if($sub_modalidad=="ITEM"||$sub_modalidad=="PRECIO")
 {
-header('Location: ../../subastasEdit2.php?token='.$token.'&sub_uid='.$sub_uid.'&pro_uid='.$pro_uid.'&tipUid='.admin::getParam("tipUid"));
+    if($sub_type=='COMPRA'){
+        header('Location: ../../subastasEdit2.php?token='.$token.'&sub_uid='.$sub_uid.'&pro_uid='.$pro_uid.'&tipUid='.admin::getParam("tipUid"));
+    }
+    else {
+        header('Location: ../../ventasEdit2.php?token='.$token.'&sub_uid='.$sub_uid.'&pro_uid='.$pro_uid.'&tipUid='.admin::getParam("tipUid"));
+    }
+     
 }else{
-header('Location: ../../subastasList.php?token='.$token.'&tipUid='.admin::getParam("tipUid"));
+        if($sub_type=='COMPRA'){
+
+            header('Location: ../../subastasList.php?token='.$token.'&tipUid='.admin::getParam("tipUid"));
+        }else
+            {
+            header('Location: ../../ventasList.php?token='.$token.'&tipUid='.admin::getParam("tipUid"));
+            
+            }
 
 }
 ?>

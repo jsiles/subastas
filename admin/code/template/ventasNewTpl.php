@@ -170,10 +170,10 @@
                     <option value="PRECIO">Por Precio</option>
 				</select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
-                                <input type="hidden" name="sub_type" id="sub_type" value="COMPRA" />
-                                </td>
+                                <input type="hidden" name="sub_type" id="sub_type" value="VENTA" />
+				</td>
 			</tr>				
-				<!--
+<!--				
 <tr>
 				<td width="29%">Tipo:</td>
 				<td width="64%">
@@ -183,8 +183,8 @@
 				</select>
 				<br /><span id="div_sub_type" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
 				</td>
-			</tr>-->
-
+			</tr>
+-->
             
             <tr>
 			<td>Fecha:</td>

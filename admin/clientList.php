@@ -1,7 +1,28 @@
 <?php
- include_once("core/session.php"); 
  include ("core/admin.php"); 
- admin::initialize('client','clientList'); 
+$tipUid=  admin::getParam("tipUid");
+switch($tipUid){
+    case 1: $opcionMenu = "client";
+            $opocionSubMenu ="clientList";
+            $etiquetaCrear = "clientNew";
+            $moduleListId=14;
+            $moduleCrearId=15;
+            break;
+    case 2: $opcionMenu = "client2";
+            $opocionSubMenu ="client2List";
+            $etiquetaCrear = "client2New";
+            $moduleListId=62;
+            $moduleCrearId=63;
+            break;    
+    default :
+            $opcionMenu = "client";
+            $opocionSubMenu ="clientList";
+            $etiquetaCrear = "clientNew";
+            $moduleListId=14;
+            $moduleCrearId=15;
+            break;
+}
+admin::initialize($opcionMenu, $opocionSubMenu); 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">    
 <html>

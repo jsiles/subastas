@@ -111,6 +111,11 @@ $db->query($sql);
 }
 }
 $token=admin::getParam("token");
-header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid.'&tipUid='.admin::getParam("tipUid"));
+$sub_type=admin::getDbValue("select sub_type from mdl_subasta where sub_uid=$sub_uid");
+
+if($sub_type=='VENTA')
+    header('Location: ../../ventasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid.'&tipUid='.admin::getParam("tipUid"));
+else
+    header('Location: ../../subastasEdit2.php?token='.$token.'&pro_uid='.$pro_uid.'&sub_uid='.$sub_uid.'&tipUid='.admin::getParam("tipUid"));
 
 ?>

@@ -481,13 +481,15 @@ class admin
 		global $basedatos, $host, $user,$pass,$domain;
         $rs = new DBmysql();
 		$sql = "select suv_status from sys_users_verify where suv_cli_uid='".$_SESSION["usr_uid"]."' and suv_token='".admin::getParam("token")."' and suv_ip='".$_SERVER['REMOTE_ADDR']."'";
+                //echo $sMenu."$%";
 		//print_r($sql);
 		$rs->query($sql);
         if ($row = $rs->next_record()){
         	if ( $row["suv_status"] === "0") {
         		/*begin autenticated */
 					$sMenu=admin::getDbValue("select mod_uid from sys_modules where mod_alias='".$sMenu."'");
-					$sSubMenu=admin::getDbValue("select mod_uid from sys_modules where mod_alias='".$sSubMenu."'");
+                                        $sSubMenu=admin::getDbValue("select mod_uid from sys_modules where mod_alias='".$sSubMenu."'");
+                                        //echo $sMenu."@@@";
 					global $indexMenu, $indexSubMenu;
 					$indexMenu = $sMenu;
 					$indexSubMenu = $sSubMenu;

@@ -1,7 +1,7 @@
 <?php
 //$pro_uid = admin::toSql($_GET["pro_uid"],"String");
 $sub_uid=admin::getParam("sub_uid");
-if (!$sub_uid) header('Location: ../../subastasList.php?token='.$token);
+if (!$sub_uid) header('Location: ../../ventasList.php?token='.$token);
 $sql = "SELECT * FROM mdl_product, mdl_subasta, mdl_pro_category WHERE sub_uid=pro_sub_uid and pca_uid=sub_pca_uid and sub_uid='".$sub_uid."'";
 $db->query($sql);
 $prod = $db->next_record();
@@ -282,11 +282,11 @@ $prod = $db->next_record();
                     </select>
 				<br /><span id="div_sub_modalidad" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>	
 				</td>
-                                <input name="sub_type" id="sub_type" type="hidden" value="COMPRA">
+                                <input name="sub_type" id="sub_type" type="hidden" value="VENTA">
 			</tr>         
                 
                 
-                <!--<tr>
+              <!--  <tr>
 				<td width="29%">Tipo de subasta:</td>
 				<td width="64%">
 				<select name="sub_type" id="sub_type" class="input" onchange="subastaOpcion();" >
@@ -438,235 +438,7 @@ $prod = $db->next_record();
 </form>
 <div id="DIV_WAIT1" style="display:none;"><img border="0" src="lib/loading.gif"></div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td width="77%" height="40"><span class="title">Proveedores habilitados</span></td>
-    <td width="23%" height="40">&nbsp;</td>
-  </tr>
-    <tr>
-    <td colspan="2" id="contentListing0">
-    <div class="row0">
-    <table class="list" width="100%">
-	<tr><td width="12%" style="color:#16652f">Proveedor</td>
-    <td width="12%" style="color:#16652f">Lugar de entrega</td>
-    <td width="12%" style="color:#16652f">Medio de transporte</td>
-    <td width="12%" style="color:#16652f">Incoterm</td>
-   <?php
-    if($prod["sub_type"]!='VENTA'){
-    ?>
-    <td width="12%" style="color:#16652f">Factor de ajuste</td>
-    <?php } ?>
-	<td align="center" width="12%" height="5">&nbsp;</td>
-    
-	</tr>
-	</table>
-    </div>
-    <div id="add<?=$ind_uid?>" class="row0">
-    <form name="frmIncoterm" action="code/execute/incotermAdd.php" enctype="multipart/form-data" > 
-	<table class="list" width="100%">
-	<tr><td width="12%"><!--<input name="cli_name" id="cli_name" onkeyup="lookup(this.value);" type="text" size="15"  onfocus="document.getElementById('div_cli_name_error').style.display='none';" onblur="document.getElementById('div_cli_name_error').style.display='none';" onclick="document.getElementById('div_cli_name_error').style.display='none';" autocomplete='off' />
-					   	
-    					<br /><span id="div_cli_name_error" style="display:none;" class="error">Seleccione un nombre del listado.</span>
-                        <input name="cli_uid" id="cli_uid" value="" type="hidden" />-->
-	<!--  <select name="cli_uid" id="cli_uid" class="input"  >
-	    <?php
-                    $sql = "select cli_uid, cli_socialreason as cli_name from mdl_client where cli_delete=0 order by cli_name";
-					$db2->query($sql);
-					while ($content=$db2->next_record())
-					{	
-					?>
-	    <option value="<?=$content["cli_uid"]?>">
-	      <?=$content["cli_name"]?>
-	      </option>
-	    <?php
-					}
-                    ?>
-	    </select>-->
-                    <div id="inputProveedor"></div>
-                <br><br>
-                <div id="busqueda">
-                    
-                    <input name="buscar" type="text" class="input3 proveedor" value="" size="20" /> <br /><label style="color:#ff8a36">Buscar por Nit o Razon Social</label>
-                <br><br>
-                </div>
- 
- <input name="sub_uid" id="sub_uid" value="<?=$sub_uid?>" type="hidden" /></td>
-    <td width="12%"><input name="inc_lugar_entrega" id="inc_lugar_entrega" type="text"  size="15" autocomplete='off'/></td>
-    <td width="12%">
-    <div id="div_inc_tra_uid_select">
-				<select name="inc_tra_uid" id="inc_tra_uid" class="input"  >
-                	<?php
-                    $sql = "select tra_uid, tra_name from mdl_transporte where tra_delete=0";
-					$db2->query($sql);
-					while ($content=$db2->next_record())
-					{	
-					?>
-					<option value="<?=$content["tra_uid"]?>"><?=$content["tra_name"]?></option>					
-					<?php
-					}
-                    ?>
-				</select>
-                <a href="nuevo" onclick="changeOtherTransporte();return false;" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
-                <a href="borrar" onclick="deleteOtherTransporte();return false;" class="small3"><?=admin::labels('del');?></a>
-                <div id="div_other_transporte" style="display:none;">
-		<input type="text" name="other_transporte" id="other_transporte" class="input3" onfocus="setClassInput3(this,'ON');document.getElementById('div_other_transporte_error').style.display='none';" onblur="setClassInput3(this,'OFF');document.getElementById('div_other_transporte_error').style.display='none';" onclick="setClassInput3(this,'ON');document.getElementById('div_other_transporte_error').style.display='none';"/>		
-		<a href="" onclick="transporteAdd();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeOtherTransporte();" class="link2">Cerrar</a>		
-                </div>
-				<br /><span id="div_other_transporte_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
-                </div>
-                
-                </td>
-    <td width="12%"><div id="div_inc_inl_uid_select">
-				<select name="inc_inl_uid" id="inc_inl_uid" class="input"  >
-                	<?php
-                    $sql = "select inl_uid, inl_name from mdl_incoterm_language where inl_delete=0";
-					$db2->query($sql);
-					while ($content=$db2->next_record())
-					{	
-					?>
-					<option value="<?=$content["inl_uid"]?>"><?=$content["inl_name"]?></option>					
-					<?php
-					}
-                    ?>
-				</select>
-                <a href="nuevo" onclick="changeOtherIncoterm();return false;" class="small2"><?=strtolower(admin::labels('add'));?></a> | 
-                <a href="borrar" onclick="deleteOtherIncoterm();return false;" class="small3"><?=admin::labels('del');?></a>
-                <div id="div_other_incoterm" style="display:none;">
-		<input type="text" name="other_incoterm" id="other_incoterm" class="input3" />		
-		<a href="" onclick="incotermAdd();return false;" class="button3"><?=admin::labels('add');?></a><a href="javascript:changeOtherincoterm();" class="link2">Cerrar</a>		</div>
-				<br /><span id="div_other_incoterm_error" style="display:none; padding-left:5px; padding-right:5px;" class="error"><?=admin::labels('required');?></span>
-                </div>
-                </td>
-                    <?php
-    if($prod["sub_type"]!='VENTA'){
-    ?>
-                <td width="12%"><input name="inc_ajuste" id="inc_ajuste" type="text" size="9" onfocus="document.getElementById('div_inc_ajuste_error').style.display='none';" onblur="document.getElementById('div_inc_ajuste_error').style.display='none';" onclick="document.getElementById('div_inc_ajuste_error').style.display='none';" value="0" />
-    %<br /><span id="div_inc_ajuste_error" style="display:none;" class="error">Escriba un monto.</span></td>
-    <?php }
-                ?>
-	<td align="center" width="12%" height="5">
-		<a href="#" onclick="document.frmIncoterm.submit();">
-		<img src="lib/save_es.gif" border="0" title="<?=admin::labels('save')?>" alt="<?=admin::labels('save')?>">
-		</a>
-	</td>
-	</tr>
-    <tr><td><div id='autocomplete' style="display:none"></div> </td></tr>
-	</table>
-        <input id="tipUid" name="tipUid" value="<?=$tipUid?>" type="hidden" />
-    <input name="token" id="token" value="<?=admin::getParam("token")?>" type="hidden" />
-	</form>
-    </div>
-    
-    </td>
-    </tr>
-   <?php 
-   $sSQL= "select * from mdl_incoterm, mdl_incoterm_language, mdl_transporte, mdl_client where inc_inl_uid=inl_uid and inc_tra_uid=tra_uid and inc_cli_uid=cli_uid and inc_delete=0 and inc_sub_uid='".$sub_uid."' order by inc_uid desc";
-   $nroReg = $db2->numrows($sSQL);
-$db2->query($sSQL);
-if ($nroReg>0)
-	{
-	?> 
-   <tr>
-      <td width="77%" height="40"><span class="title"><?=admin::labels('list','dpflist')?></span></td>
-    <td width="23%" height="40">&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan="2" id="contentListing">
-    <div class="row0">
-    <table class="list" width="100%">
-	<tr><td width="12%" style="color:#16652f">Proveedor</td>
-    <td width="12%" style="color:#16652f">Lugar de entrega</td>
-    <td width="12%" style="color:#16652f">Medio de transporte</td>
-    <td width="12%" style="color:#16652f">Incoterm</td>
-    <?php
-    if($prod["sub_type"]!='VENTA'){
-    ?>
-   
-    <td width="12%" style="color:#16652f">Factor de ajuste</td>
-    <?php } ?>
-	<td align="center" width="12%" height="5">&nbsp;</td>
-    <td align="center" width="12%" height="5">&nbsp;</td>
-	</tr>
-	</table>
-    </div>
-<div class="itemList" id="itemList" style="width:99%">  
-	<?php
-$i=1;
-while ($list = $db2->next_record())
-	{
 
-	$inc_uid = $list["inc_uid"];
-	$cli_uid = $list["inc_cli_uid"];
-	$cli_name = admin::getDBvalue("select cli_socialreason as nombre from mdl_client WHERE cli_uid='".$cli_uid."'");
-	$inc_lugar_entrega = $list["inc_lugar_entrega"];
-	$tra_uid = $list["inc_tra_uid"];
-	$tra_name = admin::getDBvalue("select tra_name from mdl_transporte WHERE tra_uid='".$tra_uid."'");
-	$inl_uid = $list["inc_inl_uid"];
-	$inl_name = admin::getDBvalue("select inl_name from mdl_incoterm_language WHERE inl_uid='".$inl_uid."'");
-	$inc_ajuste = $list["inc_ajuste"];
-
-	if ($i%2==0) $class='row0';
-	else  $class='row';
-	if ($i%2==0) $class2='row';
-	else  $class2='row1';
-  	?> 
-    <div class="groupItem" id="<?=$inc_uid?>">
-  	<div id="list_<?=$inc_uid?>" class="<?=$class?>" style="width:100%" >
-<table class="list" width="100%">
-	<tr>
-    <td width="12%"><?=$cli_name?></td>
-    <td width="12%"><?=$inc_lugar_entrega?></td>
-    <td width="12%"><?=$tra_name?></td>
-    <td width="12%"><?=$inl_name?></td>
-    <?php
-    if($prod["sub_type"]!='VENTA'){
-    ?>
-   
-    <td width="12%"><?=round($inc_ajuste,2)?>%</td>
-    <?php } ?>
-	<td align="center" width="12%" height="5">
-		<!--<a href="#" onclick="showTab('list_<?=$inc_uid?>');showTab('Add_<?=$inc_uid?>'); return false;">
-		<img src="lib/edit_es.gif" border="0" title="<?=admin::labels('edit')?>" alt="<?=admin::labels('edit')?>">
-		</a>-->
-	</td>
-	<td align="center" width="12%" height="5">
-		<a href="#" onclick="removeList(<?=$inc_uid?>);return false;">
-		<img src="lib/delete_es.gif" border="0" title="<?=admin::labels('delete')?>" alt="<?=admin::labels('delete')?>">
-		</a>
-	</td>
-	</tr>
-	</table>
-	</div>
-    </div>
-	<?php
-	$i++;
-	} 
- ?>
-</div> 
-    </td>
-    </tr>
-    <?php
-    } 
-else
-	{ ?>
-    <tr>
-    <td colspan="2"><br /></td>
-    </tr>
-  <tr>
-    <td colspan="2">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">   
-  <tr>
-    <td colspan="2" id="contentListing">
-<div  style="background-color: #f7f8f8;">
-<table class="list"  width="100%">
-	<tr><td height="30px" align="center" class="bold">
-	<?=admin::labels('subastas','noIncoterm')?>
-	</td></tr>	
- </table>
-</div>
-</td></tr></table>
-</td>
-</tr>
-<?php 	} ?>
 <tr>
 <td colspan="2">
     

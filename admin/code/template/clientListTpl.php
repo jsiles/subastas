@@ -22,12 +22,12 @@ else $dateOrder=5;
 $search = admin::toSql(admin::getParam("search"),"String");
 if (!$search || $search=='')
 {
-$_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where 1=1 ".$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where 1=1 and cli_type=$tipUid ".$categoria.$orderCode;
 //$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where cli_delete=0");
 }
 else
 {
-$_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria.$orderCode;
+$_pagi_sql= "select cli_uid, cli_nit_ci, cli_socialreason, cli_user, cli_mainemail, cli_status, cli_phone, cli_status_main from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') and cli_type=$tipUid ".$categoria.$orderCode;
 
 //$nroReg=admin::getDBvalue("select count(cli_uid) from mdl_client where (cli_socialreason like '%".$search."%' or cli_nit_ci like '%".$search."%' or cli_user like '%".$search."%' or cli_mainemail like '%".$search."%') ".$categoria);
 }
@@ -53,7 +53,7 @@ if ($nroReg>0)
         $moduleId=15;
         $valuePermit=admin::getDBvalue("select moa_status from sys_modules_options,sys_modules_access where mop_uid=moa_mop_uid and mop_status='ACTIVE'and mop_mod_uid=$moduleId and mop_lab_category='Crear' and moa_rol_uid=".$_SESSION['usr_rol']."");
 	if($valuePermit=='ACTIVE'){?>
-            <a href="<?=admin::modulesLink('clientNew')?>?token=<?=admin::getParam("token")?>"><?=admin::modulesLabels('clientNew')?></a>
+            <a href="<?=admin::modulesLink($etiquetaCrear)?>?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>"><?=admin::modulesLabels($etiquetaCrear)?></a>
         <?php
         }
         ?>

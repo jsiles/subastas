@@ -2,42 +2,25 @@
 include_once ("core/admin.php");
 $tipUid=  admin::getParam("tipUid");
 switch($tipUid){
-    case 1: $opcionMenu = "subastaRavParametros";
-            $opocionSubMenu ="subastasRavEdit";
-            $etiquetaCrear = "subastasRavNew";
-            $moduleListId=8;
-            $moduleCrearId=9;
+    case 1: $opcionMenu = "ventas";
+            $opocionSubMenu ="ventasList";
+            $etiquetaCrear = "ventasNew";
+            $moduleListId=54;
+            $moduleCrearId=55;
             break;
-    case 2: $opcionMenu = "subastaRavInforme";
-            $opocionSubMenu ="subastasRavInfEdit";
-            $etiquetaCrear = "subastasRavInfNew";
-            $moduleListId=11;
-            $moduleCrearId=12;
+    case 2: $opcionMenu = "parametrizaciones2";
+            $opocionSubMenu ="parametrizaciones2List";
+            $etiquetaCrear = "parametrizaciones2New";
+            $moduleListId=57;
+            $moduleCrearId=57;
             break;    
-    case 3: $opcionMenu = "ravSolicitud";
-            $opocionSubMenu ="ravSolicitudEdit";
-            $etiquetaCrear = "ravSolicitudNew";
-            $moduleListId=32;
-            $moduleCrearId=33;
-            break;    
-    case 4: $opcionMenu = "ravOrden";
-            $opocionSubMenu ="ravOrdenEdit";
-            $etiquetaCrear = "ravOrdenNew";
-            $moduleListId=35;
-            $moduleCrearId=36;
-            break;                
-    case 5: $opcionMenu = "subastaRavParametros2";
-            $opocionSubMenu ="subastasRavEdit2";
-            $etiquetaCrear = "subastasRavNew2";
-            $moduleListId=59;
-            $moduleCrearId=60; 
-            break;
     default :
-            $opcionMenu = "subastaRavParametros";
-            $opocionSubMenu ="subastasRavEdit";
-            $moduleListId=8;
-            $moduleCrearId=9;         
-
+            $opcionMenu = "ventas";
+            $opocionSubMenu ="ventasList";
+            $etiquetaCrear = "ventasNew";
+            $moduleListId=54;
+            $moduleCrearId=55;
+            break;
 }
 admin::initialize($opcionMenu, $opocionSubMenu); 
 ?>
@@ -56,7 +39,6 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <meta name="copyright" content="Software propietario de DEVZONE">
 <meta name="rating" content="General">
 <meta http-equiv="Content-Type" content="text/html; ISO-8859-1">
-<script type="text/javascript">var SERVER='<?=$domain?>'; </script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="js/ajaxlib.js?version=<?=VERSION?>"></script>
 <script type="text/javascript" src="js/interface.js"></script>
@@ -118,6 +100,60 @@ function removeList(id){
 		}
 	});
 }
+function aprobarSubasta(id){
+	var txt = 'Esta seguro de Aprobar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Aprobar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = m.find('#list').val();
+				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+					  $.ajax({
+						url: 'code/execute/autorizacionApr.php',
+						type: 'POST',
+						data: 'uid='+id,
+						 success: function(msg) { 
+							    if (msg=='OK') window.location.href='./ventasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+							}
+					});
+					 
+				}
+			else {}
+		//$("#list_"+id).hide();	
+		}
+	});
+}
+
+function rechazarSubasta(id){
+	var txt = 'Esta seguro de Rechazar esta Solicitud?<br><input type="hidden" id="list" name="list" value="'+ id +'" />';
+	$.prompt(txt,{
+		show:'fadeIn' ,
+		opacity:0,
+		buttons:{Rechazar:true, Cancelar:false},
+		callback: function(v,m){
+										   
+			if(v){
+				var uid = m.find('#list').val();
+				  $('#sub_'+id).fadeOut(500, function(){ $(this).remove(); });
+					  $.ajax({
+						url: 'code/execute/autorizacionRechazar.php',
+						type: 'POST',
+						data: 'uid='+id,
+						 success: function() { 
+								window.location.href='./ventasList.php?token=<?=admin::getParam("token")?>&tipUid=<?=admin::getParam("tipUid")?>';
+							}
+					});
+					 
+				}
+			else {}
+		//$("#list_"+id).hide();	
+		}
+	});
+}
+
 </script>
 </head>
 <body>
@@ -125,7 +161,7 @@ function removeList(id){
 <tr><td valign="top"><?php include_once("skin/header.php");?>
 </td></tr>
   <tr>
-    <td valign="top" id="content"><?php include_once("code/template/subastasRavEditTpl.php"); ?></td>
+    <td valign="top" id="content"><?php include_once("code/template/ventasListTpl.php"); ?></td>
   </tr>
 <tr><td>
   <?php include("skin/footer.php"); ?>
