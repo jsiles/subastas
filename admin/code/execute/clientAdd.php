@@ -29,6 +29,7 @@ $cli_commerciallastname = admin::toSql(safeHtml(admin::getParam("cli_commerciall
 $cli_user = admin::toSql(safeHtml(admin::getParam("cli_user")),"Text");
 $cli_pass = admin::toSql(safeHtml(admin::getParam("cli_pass")),"Text");
 $cli_pass = md5($cli_pass);
+$tipUid = admin::toSql(admin::getParam("tipUid"));
 //$cli_pass = $cli_pass;
 $cli_pts_uid = admin::toSql(safeHtml(admin::getParam("cli_pts_uid")),"Text");
 $item_uid = admin::getParam("nivel1_uid");
@@ -70,7 +71,7 @@ if($cli_exist==0){
 								cli_status,
 								cli_status_main,
 								cli_delete,
-								cli_date
+								cli_date, cli_type
 								)
 						values	(
 								'$cli_nit_ci',
@@ -102,7 +103,7 @@ if($cli_exist==0){
 								'$cli_status',
 								0,
 								0,
-								GETDATE()
+								GETDATE(), $tipUid
 								)";
 //        echo $sql;die;
 	$db->query($sql);
@@ -163,5 +164,5 @@ if ($validFile && $FILES['error']==0)
 }
         $token=admin::getParam("token");		
 	
-header('Location: ../../clientList.php?token='.$token);
+header('Location: ../../clientList.php?token='.$token.'&tipUid='.$tipUid);
 ?>

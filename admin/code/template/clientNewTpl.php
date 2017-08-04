@@ -2,7 +2,7 @@
 <form name="frmClient" method="post" action="code/execute/clientAdd.php?token=<?=admin::getParam("token");?>" onsubmit="return false;" enctype="multipart/form-data">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="77%" height="40"><span class="title">Crear proveedor</span></td>
+    <td width="77%" height="40"><span class="title"><?=admin::modulesLabels()?></span></td>
     <td width="23%" height="40">&nbsp;</td>
   </tr>
   <tr>
@@ -19,7 +19,17 @@
                 <div id="inputProveedor"></div>
                 <br><br>
                 <div id="busqueda">
-                    <input name="cli_nit_ci" type="text" class="input proveedor" id="cli_nit_ci" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_nit_ci').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" />&nbsp;<label style="color:#ff8a36">Buscar por Nit o CI</label><br />
+                    <input name="cli_nit_ci" type="text" class="input proveedor" id="cli_nit_ci" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_nit_ci').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" />&nbsp;
+                    <input name="tipUid" id="tipUid" value="<?=$tipUid?>" type="hidden">
+                    <?php
+                        if($tipUid==1)
+                        {
+                        ?>
+                    <label style="color:#ff8a36">Buscar por Nit o CI</label>
+                    <?php
+                        }
+                    ?>
+                    <br />
 <span id="div_cli_nit_ci" style="" class="error">NIT o CI es obligatorio</span>			
                     
                 <br><br>
@@ -375,13 +385,16 @@
 	  	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="59%" align="center">
-                                    <div id="botonRegistrar" style="display:none;">
+                                    <?php
+                                    if($tipUid==1) {$valTip="display:none;"; $btnClass="class=\"button\"";} else{ $valTip="";$btnClass=" class=\"\"";}
+                                    ?>
+                                    <div id="botonRegistrar" style="<?=$valTip?>">
 				<a href="#" onclick="verifyClient();" class="button">
 				<?=admin::labels('register');?>
 				</a></div>
 				</td>
-          <td width="41%" style="font-size:11px;"><div id="botonOr" style="display:none;">
-		  		<?=admin::labels('or');?></div> &nbsp; <a href="clientList.php?token=<?=admin::getParam("token")?>" id="botonCancelar" class="button" ><?=admin::labels('cancel');?></a> 
+          <td width="41%" style="font-size:11px;"><div id="botonOr" style="<?=$valTip?>">
+		  		<?=admin::labels('or');?></div> &nbsp; <a href="clientList.php?token=<?=admin::getParam("token")?>" id="botonCancelar" <?=$btnClass?>><?=admin::labels('cancel');?></a> 
 		  </td>
         </tr>
       </table></div>

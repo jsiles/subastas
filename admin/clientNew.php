@@ -59,6 +59,10 @@ admin::initialize($opcionMenu, $opocionSubMenu);
 <link rel="stylesheet" type="text/css" href="css/impromptu.css">
 <script type="text/javascript" src="js/jquery.Impromptu.js"></script>
 <!--ENDIMPROMTU--> 
+<?php
+if($tipUid==1)
+{
+?>
 <script type="text/javascript">
    $(function() {
     
@@ -92,6 +96,9 @@ admin::initialize($opcionMenu, $opocionSubMenu);
     })
  })  
 </script>
+<?php
+}
+?>
 </head>
 <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

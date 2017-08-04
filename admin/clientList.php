@@ -61,7 +61,7 @@ function removeList(id){
 
 				  $('#sub_'+uid).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/clientDel.php?token=<?=admin::getParam("token");?>',
+						url: 'code/execute/clientDel.php?token=<?=admin::getParam("token");?>&tipUid=<?=$tipUid?>',
 						type: 'POST',
 						data: 'uid='+uid
 					});
@@ -84,7 +84,7 @@ function removeListCat(id){
 				var uid = m.find('#list').val();
 				  $('#'+id).fadeOut(500, function(){ $(this).remove(); });
 					  $.ajax({
-						url: 'code/execute/clientCatDel.php?token=<?=admin::getParam("token");?>',
+						url: 'code/execute/clientCatDel.php?token=<?=admin::getParam("token");?>&tipUid=<?=$tipUid?>',
 						type: 'POST',
 						data: 'uid='+id
 					});
@@ -114,7 +114,7 @@ function aprobarSubasta(id){
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./clientList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./clientList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>';
 							}
 					});
 					 
@@ -141,7 +141,7 @@ function rechazarSubasta(id){
 						type: 'POST',
 						data: 'uid='+id,
 						 success: function() { 
-								window.location.href='./clientList.php?token=<?=admin::getParam("token")?>';
+								window.location.href='./clientList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>';
 							}
 					});
 					 

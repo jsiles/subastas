@@ -32,6 +32,7 @@ $item_uid = admin::getParam("nivel1_uid");
 $cli_ite_uid =  admin::getParam("nivel2_uid");
 $cli_status = admin::toSql(safeHtml(admin::getParam("cli_status")),"Text");	
 $cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
+$tipUid = admin::toSql(admin::getParam("tipUid"));
 
 $sql = "update mdl_client set
 			cli_lec_uid='".$cli_lec_uid."',
@@ -119,5 +120,5 @@ if ($validFile && $FILES['error']==0)
 	}
 $token=admin::getParam("token");		
 	
-header('Location: ../../clientList.php?token='.$token);		
+header('Location: ../../clientList.php?token='.$token.'&tipUid='.$tipUid);		
 ?>

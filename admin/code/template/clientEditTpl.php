@@ -39,7 +39,7 @@ $regusers = $db->next_record();
            <tr>
                <td width="29%">NIT o CI:</td>
             <td width="64%"><?=$regusers["cli_nit_ci"]?>
-            
+            <input name="tipUid" id="tipUid" value="<?=$tipUid?>" type="hidden">
             <div style="display:none">
             <input name="cli_nit_ci" type="text" class="input" id="cli_nit_ci" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_nit_ci').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_nit_ci').style.display='none';" value="<?=$regusers["cli_nit_ci"]?>" /><br /><span id="div_cli_nit_ci" style="display:none;" class="error">NIT o CI es necesario</span>
             </div>
@@ -469,7 +469,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
 				</a> 
 				</td>
           <td width="41%" style="font-size:11px;">
-		  		<?=admin::labels('or');?> <a href="clientList.php?token=<?=admin::getParam("token")?>" ><?=admin::labels('cancel');?></a> 
+		  		<?=admin::labels('or');?> <a href="clientList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>" ><?=admin::labels('cancel');?></a> 
 		  </td>
         </tr>
       </table></div>

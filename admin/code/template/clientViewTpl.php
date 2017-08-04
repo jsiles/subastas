@@ -228,7 +228,7 @@ $regusers = $db->next_record();
 				
 				</td>
           <td width="75%" style="font-size:11px;">
-		  		<a href="clientList.php?token=<?=admin::getParam("token")?>" class="button">Volver</a> 
+		  		<a href="clientList.php?token=<?=admin::getParam("token")?>&tipUid=<?=$tipUid?>" class="button">Volver</a> 
 		  </td>
         </tr>
       </table></div>
