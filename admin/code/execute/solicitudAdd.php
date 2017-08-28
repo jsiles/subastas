@@ -51,7 +51,7 @@ $sql = "insert into mdl_solicitud_compra
 //echo $sql;//die;
 	$db->query($sql);
 
-        
+$db->query("update mdl_solicitud_material set som_delete=1 where som_sol_uid=$solUid");        
 $FILES2 = $_FILES ['sol_document'];
 if ($FILES2["name"] != '')
 	{
