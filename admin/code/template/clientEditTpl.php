@@ -60,7 +60,7 @@ $regusers = $db->next_record();
             <td width="64%">
             <div id="div_cli_lec_uid_select">
             <select name="cli_lec_uid" class="txt10" id="cli_lec_uid">
-                <? 
+                <?php 
 				$sql = "select lec_uid, lec_name from mdl_legalclassification where lec_delete=0";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
@@ -68,7 +68,7 @@ $regusers = $db->next_record();
 						($content["lec_uid"]==$regusers["cli_lec_uid"])?$selected="selected":$selected=""; 
 				?>
             	    <option value="<?=$content["lec_uid"]?>" <?=$selected?>><?=$content["lec_name"]?></option>	
-              	<? 
+              	<?php 
 					}
 				?>
 			</select>
@@ -86,7 +86,7 @@ $regusers = $db->next_record();
             <td>
             <div id="div_cli_cov_uid_select">
             <select name="cli_cov_uid" class="txt10" id="cli_cov_uid">
-                <? 
+                <?php 
 				$sql = "select cov_uid, cov_name from mdl_coverage where cov_delete=0";
 					$db2->query($sql);
 					while ($content=$db2->next_record())
@@ -94,7 +94,7 @@ $regusers = $db->next_record();
 						($content["cov_uid"]==$regusers["cli_cov_uid"])?$selected="selected":$selected="";
 				?>
             	    <option value="<?=$content["cov_uid"]?>" <?=$selected?>><?=$content["cov_name"]?></option>	
-              	<? 
+              	<?php 
 					}
 				?>
 			</select>
@@ -238,8 +238,10 @@ $regusers = $db->next_record();
 <input name="cli_pass" style="display:none" type="text" class="input" id="cli_pass" size="60" onfocus="setClassInput(this,'ON');document.getElementById('div_cli_pass').style.display='none';" onblur="setClassInput(this,'OFF');document.getElementById('div_cli_pass').style.display='none';" onclick="setClassInput(this,'ON');document.getElementById('div_cli_pass').style.display='none';" value="" /><br /><span id="div_cli_pass" style="display:none;" class="error">Password es necesario</span></td>
             <td width="7%"><a href="pass" id="linkpass" style="display:none;" onClick="return generarPassword(this.form,'cli_pass',10);">Generar</a>&nbsp;</td>
           </tr>
-          
-          <tr>
+           <?php
+             if($tipUid==2) $styleD="display:none;";
+          ?>
+          <tr style="<?=$styleD?>">
             <td width="29%">Rubro:</td>
             <td width="64%">
             <div style="float: left" id="div_nivel1_select">
@@ -306,7 +308,7 @@ $regusers = $db->next_record();
             <td width="7%">&nbsp;</td>
           </tr>
           
-          <tr>
+          <tr style="<?=$styleD?>">
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
             <select name="cli_pts_uid" class="txt10" id="cli_pts_uid" onchange="ptsClient('<?=admin::getParam("token")?>'); return false;">
@@ -325,7 +327,7 @@ $regusers = $db->next_record();
             <td width="7%">&nbsp;</td>
           </tr>
           
-          <tr>
+          <tr style="<?=$styleD?>">
           <td colspan="3">
 
           <div id="div_cli_pts_uid_select">
@@ -353,7 +355,7 @@ $sql2 = "select w.wtp_uid, w.wtp_name,  d.wde_description from mdl_waytopay w, m
           </td>
           </tr>
           
-          <tr>
+          <tr style="<?=$styleD?>">
             <td width="29%">Documentacion:</td>
             <td width="64%">
             <!--<div style="float: left; width:50%">

@@ -38,8 +38,8 @@ $cli_ite_uid =  admin::getParam("nivel2_uid");
 $cli_pts_description = admin::toSql(safeHtml(admin::getParam("cli_pts_description"]),"Text");*/
 $cli_status = admin::toSql(safeHtml(admin::getParam("cli_status")),"Text");
 
-$cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_user='".$cli_user."' and cli_delete=0");
-
+$cli_exist = admin::getDBvalue("select count(cli_user) FROM mdl_client where cli_user='".$cli_user."' and cli_delete=0 and cli_type=$tipUid");
+//echo $cli_exist;
 if($cli_exist==0){
 	$sql = "insert into mdl_client(							
 								cli_nit_ci,
@@ -105,7 +105,7 @@ if($cli_exist==0){
 								0,
 								GETDATE(), $tipUid
 								)";
-//        echo $sql;die;
+       // echo $sql;die;
 	$db->query($sql);
 
 	$cli_uid = admin::getDBvalue("select cli_uid FROM mdl_client where cli_nit_ci='".$cli_nit_ci."' and cli_delete=0");
@@ -163,6 +163,6 @@ if ($validFile && $FILES['error']==0)
 	}
 }
         $token=admin::getParam("token");		
-	
+	//die;
 header('Location: ../../clientList.php?token='.$token.'&tipUid='.$tipUid);
 ?>

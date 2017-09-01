@@ -143,8 +143,10 @@ $regusers = $db->next_record();
             <td width="64%">***************</td>
             <td width="7%">&nbsp;</td>
           </tr>
-          
-          <tr>
+           <?php
+             if($tipUid==2) $styleD="display:none;";
+          ?>
+          <tr style="<?=$styleD?>">
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
                 <?php 
@@ -161,13 +163,13 @@ $regusers = $db->next_record();
             <td width="7%">&nbsp;</td>
           </tr>
           
-          <tr>
+          <tr style="<?=$styleD?>">
             <td width="29%">Datos adicionales del pago:</td>
             <td width="64%"><?=$regusers["cli_pts_description"]?></td>
             <td width="7%">&nbsp;</td>
           </tr>
           
-          <tr>
+          <tr style="<?=$styleD?>">
             <td width="29%">Documentacion:</td>
             <td width="64%">
                 <?php 

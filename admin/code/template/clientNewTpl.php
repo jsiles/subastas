@@ -236,8 +236,10 @@
 <span id="div_cli_pass" style="" class="error">Contrase&ntilde;a es obligatorio</span>			</td>
             <td width="7%"><a href="pass" onClick="return generarPassword(this.form,'cli_pass',10);">Generar</a>&nbsp;</td>
           </tr>
-          
-          <tr>
+          <?php
+             if($tipUid==2) $styleD="display:none;";
+          ?>
+          <tr style="<?=$styleD?>">
             <td width="29%">Rubro:</td>
             <td width="64%">
             <div style="float: left" id="div_nivel1_select">
@@ -292,7 +294,7 @@
             <td width="7%">&nbsp;</td>
           </tr>
           
-          <tr>
+          <tr style="<?=$styleD?>">
             <td width="29%">Forma de pago al proveedor:</td>
             <td width="64%">
             
@@ -321,23 +323,12 @@
 
           </td>
           </tr>
-          <tr>
+          <tr style="<?=$styleD?>">
             <td width="29%">Documentacion:<br />
             <p>Puede marcar los documentos entregados o Informacion completa para que se marquen todos</p>
             </td>
             <td width="64%">
-            <!--<div style="float: left; width:50%">
-            <? 
-				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 and doc_uid=10";
-					$db2->query($sql);
-					while ($content=$db2->next_record())
-					{
-				?><br /><br /><br /><br /><br />
-            	    <input id="cli_doc_uid[<?=$content["doc_uid"]?>]" name="cli_doc_uid[<?=$content["doc_uid"]?>]" type="checkbox" class="subDocs2" onclick="checkinOut();" /><?=$content["doc_name"]?>	
-              	<? 
-					}
-				?>
-            </div>-->
+            
             <div style="float: left; width:50%"><?php 
 				$sql = "select doc_uid, doc_name from mdl_documents where doc_delete=0 ";
 					$db2->query($sql);
